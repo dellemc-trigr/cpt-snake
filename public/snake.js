@@ -1,12 +1,27 @@
 $(document).ready(function(){
+
+	console.log('starting...');
+
+	$("#canvas").swipe( {
+    swipeStatus:function(event, phase, direction, distance)
+    {
+			if(direction == 'left' && d != "right") d = "left";
+			else if(direction == 'up' && d != "down") d = "up";
+			else if(direction == 'right' && d != "left") d = "right";
+			else if(direction == 'down' && d != "up") d = "down";
+    },
+    triggerOnTouchEnd:false,
+    threshold:200
+  });
+
 	//Canvas stuff
 	var canvas = $("#canvas")[0];
 	var ctx = canvas.getContext("2d");
+
 	var w = $("#canvas").width();
 	var h = $("#canvas").height();
-
 	//Lets save the cell width in a variable for easy control
-	var cw = 10;
+	var cw = 30;
 	var d;
 	var food;
 	var score;
@@ -58,6 +73,10 @@ $(document).ready(function(){
 		//Lets paint the canvas now
 		ctx.fillStyle = "white";
 		ctx.fillRect(0, 0, w, h);
+
+		var img=document.getElementById("scream");
+    ctx.drawImage(img,10,10);
+
 		ctx.strokeStyle = "black";
 		ctx.strokeRect(0, 0, w, h);
 
@@ -151,5 +170,4 @@ $(document).ready(function(){
 		else if(key == "40" && d != "up") d = "down";
 		//The snake is now keyboard controllable
 	})
-	
 })
