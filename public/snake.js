@@ -75,7 +75,7 @@ $(document).ready(function(){
 		ctx.fillRect(0, 0, w, h);
 
 		var img=document.getElementById("scream");
-    ctx.drawImage(img,10,10);
+    ctx.drawImage(img,0,0, w, h);
 
 		ctx.strokeStyle = "black";
 		ctx.strokeRect(0, 0, w, h);
