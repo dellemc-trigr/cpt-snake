@@ -1,0 +1,16 @@
+html, body {
+    height: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+#snakeContainer {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+#snakeCanvas {
+  width: 100%;
+  height: 100%;
+}
