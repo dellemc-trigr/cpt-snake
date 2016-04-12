@@ -66,7 +66,7 @@ $(document).ready(function() {
     ctx.fillStyle = "white";
     ctx.fillRect(0, 0, w, h);
 
-    paintBackgroundImage("snake/dojo-logo.png", w, h)
+    paintBackgroundImage("assets/image/dojo-logo.png", w, h)
 
     //The movement code for the snake to come here.
     //The logic is simple

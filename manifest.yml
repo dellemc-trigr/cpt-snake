@@ -1,4 +1,4 @@
 ---
 applications:
-- name: cpt-snake1
+- name: cpt-snake
   memory: 64M

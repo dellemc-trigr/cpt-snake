@@ -5,12 +5,21 @@ html, body {
 }
 
 #snakeContainer {
-  position: absolute;
   width: 100%;
-  height: 100%;
+  height: 90%;
 }
 
 #snakeCanvas {
   width: 100%;
   height: 100%;
+}
+
+#sponsorContainer {
+  width: 100%;
+  height: 10%;
+}
+
+#sponsors {
+  width: 100%;
+  height: 50px;
 }
