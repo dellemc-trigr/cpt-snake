@@ -16,10 +16,20 @@ html, body {
 
 #sponsorContainer {
   width: 100%;
-  height: 10%;
+  height: 5%;
 }
 
 #sponsors {
+  width: 100%;
+  height: 50px;
+}
+
+#shareContainer {
+  width: : 100%;
+  height: 5%;
+}
+
+#twitter {
   width: 100%;
   height: 50px;
 }
