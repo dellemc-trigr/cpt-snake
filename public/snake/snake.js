@@ -65,6 +65,7 @@ $(document).ready(function() {
 
     paintBackgroundImage("assets/image/background.jpg", w, h)
 
+
     //The movement code for the snake to come here.
     //The logic is simple
     //Pop out the tail cell and place it infront of the head cell
@@ -105,11 +106,13 @@ $(document).ready(function() {
     //The snake can now eat the food.
     snake_array.unshift(tail); //puts back the tail as the first cell
 
-    for(var i = 0; i < snake_array.length; i++) {
+    paintHead(snake_array[0].x, snake_array[0].y)
+    for(var i = 1; i < snake_array.length-1; i++) {
       var c = snake_array[i];
       //Lets paint 10px wide cells
-      paintCell(c.x, c.y);
+      paintBody(c.x, c.y);
     }
+    paintTail(snake_array[snake_array.length-1].x, snake_array[snake_array.length-1].y)
 
     //Lets paint the food
     paintCell(food.x, food.y);
@@ -126,19 +129,47 @@ $(document).ready(function() {
     ctx.strokeRect(x*cw, y*cw, cw, cw);
   }
 
-  function paintBackgroundImage(url, w, h) {
-    var img = new Image();
-    img.src = url;
+  function paintHead(x, y) {
+    var head = new Image();
+    head.src = "assets/image/snake-head-top.png";
+    var pattern = ctx.createPattern(head, "repeat")
+    ctx.fillStyle = pattern;
+    ctx.fillRect(x*cw, y*cw, cw, cw)
+  }
 
-    var image_width = img.naturalWidth
-    var image_height = img.naturalHeight
+  function paintTail(x, y) {
+    var tail = new Image();
+    tail.src = "assets/image/snake-tail.png";
+    var pattern = ctx.createPattern(tail, "repeat")
+    ctx.fillStyle = pattern;
+    ctx.fillRect(x*cw, y*cw, cw, cw)
+  }
+
+  function paintBody(x, y) {
+    var body = new Image();
+    body.src = "assets/image/snake-body.png";
+    var pattern = ctx.createPattern(body, "repeat")
+    ctx.fillStyle = pattern;
+    ctx.fillRect(x*cw, y*cw, cw, cw)
+  }
+
+  function cleanTail(x, y) {
+    ctx.fillStyle
+  }
+
+  function paintBackgroundImage(url, w, h) {
+    var background = new Image();
+    background.src = url;
+
+    var image_width = background.naturalWidth;
+    var image_height = background.naturalHeight;
 
     if (h/w > image_height/image_width) {
-      var new_width = image_width*h/image_height
-      ctx.drawImage(img, (w - new_width)/2, 0, new_width, h);
+      new_width = image_width*h/image_height;
+      ctx.drawImage(background, (w-new_width)/2, 0, new_width, h);
     } else {
-      var new_height = image_height*w/image_width
-      ctx.drawImage(img, 0, (h-new_height)/2, w, new_height);
+      new_height = image_height*w/image_width;
+      ctx.drawImage(background, 0, (h-new_height)/2, w, new_height);
     }
   }
 
@@ -147,7 +178,7 @@ $(document).ready(function() {
     //in an array of cells or not
     for(var i = 0; i < array.length; i++) {
       if(array[i].x == x && array[i].y == y)
-       return true;
+        return true;
     }
     return false;
   }
