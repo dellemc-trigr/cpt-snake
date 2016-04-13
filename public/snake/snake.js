@@ -6,7 +6,6 @@ $(document).ready(function() {
   var d;
   var food;
   var score;
-  //Lets create the snake now
   var snake_array; //an array of cells to make up the snake
   drawCanvas();
 
@@ -14,7 +13,9 @@ $(document).ready(function() {
   function drawCanvas() {
     var width = $(container).width();
     var height = $(container).height();
-
+    if(width > 1000) {
+      cw = 35
+    }
     canvas.attr('width', width); //max width
     canvas.attr('height', height); //max height
 
@@ -41,8 +42,7 @@ $(document).ready(function() {
   function createSnake() {
     var length = 5; //Length of the snake
     snake_array = []; //Empty array to start with
-    for(var i = length-1; i>=0; i--)
-    {
+    for(var i = length-1; i>=0; i--) {
       //This will create a horizontal snake starting from the top left
       snake_array.push({x: i, y:0});
     }
@@ -54,9 +54,6 @@ $(document).ready(function() {
       x: Math.round(Math.random()*(w-cw)/cw),
       y: Math.round(Math.random()*(h-cw)/cw),
     };
-
-    //This will create a cell with x/y between 0-44
-    //Because there are 45(450/10) positions accross the rows and columns
   }
 
   //Lets paint the snake now

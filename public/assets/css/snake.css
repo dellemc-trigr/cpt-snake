@@ -1,35 +1,31 @@
 html, body {
-  height: 100%;
+  height: 100vh;
   padding: 0;
   margin: 0;
+  position: relative;
+}
+
+img {
+  background: #FFFFFF;
+  vertical-align: middle;
+  /*box-shadow: 5px 5px 2px #888888;*/
+  height: 100%;
 }
 
 #snakeContainer {
   width: 100%;
-  height: 90%;
+  position: absolute;
+  top: 0;
+  bottom: 5%;
 }
 
-#snakeCanvas {
-  width: 100%;
-  height: 100%;
+#foot {
+  position: absolute;
+  max-height: 5%;
+  bottom: 0;
 }
 
-#sponsorContainer {
-  width: 100%;
-  height: 5%;
-}
-
-#sponsors {
-  width: 100%;
-  height: 50px;
-}
-
-#shareContainer {
-  width: : 100%;
-  height: 5%;
-}
-
-#twitter {
-  width: 100%;
-  height: 50px;
+.footers {
+  max-height: 5%;
+  vertical-align: middle;
 }
