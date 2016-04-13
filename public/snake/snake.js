@@ -63,7 +63,7 @@ $(document).ready(function() {
     ctx.fillStyle = "white";
     ctx.fillRect(0, 0, w, h);
 
-    paintBackgroundImage("assets/image/dojo-logo.png", w, h)
+    paintBackgroundImage("assets/image/background.jpg", w, h)
 
     //The movement code for the snake to come here.
     //The logic is simple
@@ -133,7 +133,7 @@ $(document).ready(function() {
     var image_width = img.naturalWidth
     var image_height = img.naturalHeight
 
-    if (h < w) {
+    if (h/w > image_height/image_width) {
       var new_width = image_width*h/image_height
       ctx.drawImage(img, (w - new_width)/2, 0, new_width, h);
     } else {
