@@ -17,6 +17,7 @@ img {
   position: absolute;
   top: 0;
   bottom: 5%;
+  border-bottom: medium solid #888888;
 }
 
 #foot {

@@ -95,7 +95,7 @@ $(document).ready(function() {
     //Create a new head instead of moving the tail
     if(nx == food.x && ny == food.y) {
       var tail = {x: nx, y: ny};
-      score++;
+      score += 100;
       //Create new food
       createFood(w, h);
     } else {
