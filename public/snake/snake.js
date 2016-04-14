@@ -28,6 +28,7 @@ $(document).ready(function() {
     createSnake();
     createFood(w, h); //Now we can see the food particle
     //finally lets display the score
+    paintBackgroundImage("assets/image/background.jpg", w, h)
 
     score = 0;
 
@@ -60,11 +61,7 @@ $(document).ready(function() {
   function paint(w, h) {
     //To avoid the snake trail we need to paint the BG on every frame
     //Lets paint the canvas now
-    ctx.fillStyle = "white";
-    ctx.fillRect(0, 0, w, h);
-
     paintBackgroundImage("assets/image/background.jpg", w, h)
-
 
     //The movement code for the snake to come here.
     //The logic is simple
@@ -112,17 +109,17 @@ $(document).ready(function() {
       //Lets paint 10px wide cells
       paintBody(c.x, c.y);
     }
-    paintTail(snake_array[snake_array.length-1].x, snake_array[snake_array.length-1].y)
 
+    paintTail(snake_array[snake_array.length-1].x, snake_array[snake_array.length-1].y)
     //Lets paint the food
-    paintCell(food.x, food.y);
+    paintFood(food.x, food.y);
     //Lets paint the score
     var score_text = "Score: " + score;
     ctx.fillText(score_text, 5, h-5);
   }
 
   //Lets first create a generic function to paint cells
-  function paintCell(x, y) {
+  function paintFood(x, y) {
     ctx.fillStyle = "blue";
     ctx.fillRect(x*cw, y*cw, cw, cw);
     ctx.strokeStyle = "white";
@@ -131,19 +128,31 @@ $(document).ready(function() {
 
   function paintHead(x, y) {
     var head = new Image();
-    head.src = "assets/image/snake-head-top.png";
+    if (cw == 20) {
+      head.src = "assets/image/snake-head-top-small.png";
+    } else {
+      head.src = "assets/image/snake-head-top.png";
+    }
     paintRect(head, x, y)
   }
 
   function paintTail(x, y) {
     var tail = new Image();
-    tail.src = "assets/image/snake-tail.png";
+    if (cw == 20) {
+      tail.src = "assets/image/snake-tail-small.png";
+    } else {
+      tail.src = "assets/image/snake-tail.png";
+    }
     paintRect(tail, x, y)
   }
 
   function paintBody(x, y) {
     var body = new Image();
-    body.src = "assets/image/snake-body.png";
+    if (cw == 20) {
+      body.src = "assets/image/snake-body-small.png";
+    } else {
+      body.src = "assets/image/snake-body.png";
+    }
     paintRect(body, x, y)
   }
 
@@ -151,10 +160,6 @@ $(document).ready(function() {
     var pattern = ctx.createPattern(img, "repeat")
     ctx.fillStyle = pattern;
     ctx.fillRect(x*cw, y*cw, cw, cw)
-  }
-
-  function cleanTail(x, y) {
-    ctx.fillStyle
   }
 
   function paintBackgroundImage(url, w, h) {
