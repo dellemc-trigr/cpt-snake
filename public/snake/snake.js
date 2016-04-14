@@ -132,23 +132,23 @@ $(document).ready(function() {
   function paintHead(x, y) {
     var head = new Image();
     head.src = "assets/image/snake-head-top.png";
-    var pattern = ctx.createPattern(head, "repeat")
-    ctx.fillStyle = pattern;
-    ctx.fillRect(x*cw, y*cw, cw, cw)
+    paintRect(head, x, y)
   }
 
   function paintTail(x, y) {
     var tail = new Image();
     tail.src = "assets/image/snake-tail.png";
-    var pattern = ctx.createPattern(tail, "repeat")
-    ctx.fillStyle = pattern;
-    ctx.fillRect(x*cw, y*cw, cw, cw)
+    paintRect(tail, x, y)
   }
 
   function paintBody(x, y) {
     var body = new Image();
     body.src = "assets/image/snake-body.png";
-    var pattern = ctx.createPattern(body, "repeat")
+    paintRect(body, x, y)
+  }
+
+  function paintRect(img, x, y) {
+    var pattern = ctx.createPattern(img, "repeat")
     ctx.fillStyle = pattern;
     ctx.fillRect(x*cw, y*cw, cw, cw)
   }
