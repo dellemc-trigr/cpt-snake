@@ -7,6 +7,7 @@ $(document).ready(function() {
   var food;
   var score;
   var snake_array; //an array of cells to make up the snake
+  var game_loop;
 
   twitter = $("#twitterButton");
   twitter.attr("data-text", "I just #CFpush my first app #pairprogramming with @EMCDojo & #CloudFoundry at #EMCWorld. Click to play #dojosnake.");
@@ -34,13 +35,13 @@ $(document).ready(function() {
     createSnake();
     createFood(w, h); //Now we can see the food particle
     //finally lets display the score
+    loadImg();
     paintBackgroundImage("assets/image/background.jpg", w, h)
 
     score = 0;
 
     //Lets move the snake now using a timer which will trigger the paint function
     //every 60ms
-    if(typeof game_loop != "undefined") clearInterval(game_loop);
     game_loop = setInterval( function() {
       paint(w, h);
     }, 150);
@@ -67,7 +68,6 @@ $(document).ready(function() {
   function paint(w, h) {
     //To avoid the snake trail we need to paint the BG on every frame
     //Lets paint the canvas now
-    paintBackgroundImage("assets/image/background.jpg", w, h)
 
     //The movement code for the snake to come here.
     //The logic is simple
@@ -87,34 +87,34 @@ $(document).ready(function() {
     //Lets add the code for body collision
     //Now if the head of the snake bumps into its body, the game will restart
     if(nx == -1 || nx >= Math.round(w/cw) || ny == -1 || ny >= Math.round(h/cw) || checkCollision(nx, ny, snake_array)) {
-      init(w, h);
+      h = snake_array[0]
+      endGame(h.x, h.y);
       return;
     }
+    paintBackgroundImage("assets/image/background.jpg", w, h)
+
 
     //Lets write the code to make the snake eat the food
     //The logic is simple
     //If the new head position matches with that of the food,
     //Create a new head instead of moving the tail
     if(nx == food.x && ny == food.y) {
-      var tail = {x: nx, y: ny};
       score += 10;
-      //Create new food
       createFood(w, h);
     } else {
-      var tail = snake_array.pop(); //pops out the last cell
-      tail.x = nx; tail.y = ny;
+      snake_array.pop(); //pops out the last cell
     }
     //The snake can now eat the food.
-    snake_array.unshift(tail); //puts back the tail as the first cell
+    var head = {x: nx, y: ny};
+    snake_array.unshift(head); //puts back the head as the first cell
 
-    var head = snake_array[0]
-    paintHead(head.x, head.y)
+    paintHead(head.x, head.y);
     for(var i = 1; i < snake_array.length-1; i++) {
       var body = snake_array[i];
       paintBody(body.x, body.y);
     }
-    var tail = snake_array[snake_array.length-1]
-    paintTail(tail.x, tail.y)
+    var tail = snake_array[snake_array.length-1];
+    paintTail(tail.x, tail.y);
 
     //Lets paint the food
     paintFood(food.x, food.y);
@@ -126,8 +126,7 @@ $(document).ready(function() {
 
   //Lets first create a generic function to paint cells
   function paintFood(x, y) {
-    console.log("im a food");
-    ctx.fillStyle = "blue";
+    ctx.fillStyle = "red";
     ctx.fillRect(x*cw, y*cw, cw, cw);
     ctx.strokeStyle = "white";
     ctx.strokeRect(x*cw, y*cw, cw, cw);
@@ -156,7 +155,7 @@ $(document).ready(function() {
         head.src = "assets/image/snake-head-left.png";
       }
     }
-    paintRect(head, x, y)
+    paintRect(head, x, y);
   }
 
   function paintTail(x, y) {
@@ -166,7 +165,7 @@ $(document).ready(function() {
     } else {
       tail.src = "assets/image/snake-tail.png";
     }
-    paintRect(tail, x, y)
+    paintRect(tail, x, y);
   }
 
   function paintBody(x, y) {
@@ -176,13 +175,51 @@ $(document).ready(function() {
     } else {
       body.src = "assets/image/snake-body.png";
     }
-    paintRect(body, x, y)
+    paintRect(body, x, y);
+  }
+
+  function paintExplosion(x, y) {
+    var explosion = new Image();
+    if (cw == 20) {
+      explosion.src = "assets/image/explosion-small.png";
+    } else {
+      explosion.src = "assets/image/explosion.png";
+    }
+    ctx.drawImage(explosion, (x- 1/2)*cw, (y-1/2)*cw, cw*2, cw*2);
+  }
+
+  function endGame(nx, ny) {
+    paintExplosion(nx, ny);
+    clearInterval(game_loop);
+    var gameOverText = document.getElementById('gameOver');
+    if(gameOverText) {
+      gameOverText.className += gameOverText.className ? ' blink' : 'blink';
+    }
   }
 
   function paintRect(img, x, y) {
     var pattern = ctx.createPattern(img, "repeat")
     ctx.fillStyle = pattern;
-    ctx.fillRect(x*cw, y*cw, cw, cw)
+    ctx.fillRect(x*cw, y*cw, cw, cw);
+  }
+
+  function loadImg() {
+    var images = ["assets/image/snake-head-up.png",
+                  "assets/image/snake-head-down.png",
+                  "assets/image/snake-head-right.png",
+                  "assets/image/snake-head-left.png",
+                  "assets/image/snake-head-up-small.png",
+                  "assets/image/snake-head-down-small.png",
+                  "assets/image/snake-head-right-small.png",
+                  "assets/image/snake-head-left-small.png",
+                  "assets/image/explosion.png",
+                  "assets/image/explosion-small.png"];
+    imagesNo = images.length;
+    for(var i = 0; i < imagesNo; i++) {
+      var image = new Image();
+      image.src = images[i];
+      console.log(image);
+    }
   }
 
   function paintBackgroundImage(url, w, h) {
