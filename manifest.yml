@@ -1,4 +1,4 @@
 ---
 applications:
-- name: cpt-snake
+- name: dojo-snake
   memory: 64M

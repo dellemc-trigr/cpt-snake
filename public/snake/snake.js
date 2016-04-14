@@ -7,6 +7,12 @@ $(document).ready(function() {
   var food;
   var score;
   var snake_array; //an array of cells to make up the snake
+
+  twitter = $("#twitterButton");
+  twitter.attr("data-text", "I just #CFpush my first app #pairprogramming with @EMCDojo & #CloudFoundry at #EMCWorld. Click to play #dojosnake.");
+  twitter.attr("data-url", "http://dojo-snake.52.71.136.166.xip.io/");
+  twitter.attr("data-related", "EmcDojo");
+
   drawCanvas();
 
   //-----------------HELPER FUNCTIONS GO HERE------------
@@ -81,9 +87,7 @@ $(document).ready(function() {
     //Lets add the code for body collision
     //Now if the head of the snake bumps into its body, the game will restart
     if(nx == -1 || nx >= Math.round(w/cw) || ny == -1 || ny >= Math.round(h/cw) || checkCollision(nx, ny, snake_array)) {
-      //restart game
       init(w, h);
-      //Lets organize the code a bit now.
       return;
     }
 
@@ -93,7 +97,7 @@ $(document).ready(function() {
     //Create a new head instead of moving the tail
     if(nx == food.x && ny == food.y) {
       var tail = {x: nx, y: ny};
-      score += 100;
+      score += 10;
       //Create new food
       createFood(w, h);
     } else {
@@ -103,16 +107,18 @@ $(document).ready(function() {
     //The snake can now eat the food.
     snake_array.unshift(tail); //puts back the tail as the first cell
 
-    paintHead(snake_array[0].x, snake_array[0].y)
+    var head = snake_array[0]
+    paintHead(head.x, head.y)
     for(var i = 1; i < snake_array.length-1; i++) {
-      var c = snake_array[i];
-      //Lets paint 10px wide cells
-      paintBody(c.x, c.y);
+      var body = snake_array[i];
+      paintBody(body.x, body.y);
     }
+    var tail = snake_array[snake_array.length-1]
+    paintTail(tail.x, tail.y)
 
-    paintTail(snake_array[snake_array.length-1].x, snake_array[snake_array.length-1].y)
     //Lets paint the food
     paintFood(food.x, food.y);
+
     //Lets paint the score
     var score_text = "Score: " + score;
     ctx.fillText(score_text, 5, h-5);
@@ -120,6 +126,7 @@ $(document).ready(function() {
 
   //Lets first create a generic function to paint cells
   function paintFood(x, y) {
+    console.log("im a food");
     ctx.fillStyle = "blue";
     ctx.fillRect(x*cw, y*cw, cw, cw);
     ctx.strokeStyle = "white";
@@ -129,9 +136,25 @@ $(document).ready(function() {
   function paintHead(x, y) {
     var head = new Image();
     if (cw == 20) {
-      head.src = "assets/image/snake-head-top-small.png";
+      if (d == "up") {
+        head.src = "assets/image/snake-head-up-small.png";
+      } else if (d == "down") {
+        head.src = "assets/image/snake-head-down-small.png";
+      } else if (d == "right") {
+        head.src = "assets/image/snake-head-right-small.png";
+      } else if (d == "left") {
+        head.src = "assets/image/snake-head-left-small.png";
+      }
     } else {
-      head.src = "assets/image/snake-head-top.png";
+      if (d == "up") {
+        head.src = "assets/image/snake-head-up.png";
+      } else if (d == "down") {
+        head.src = "assets/image/snake-head-down.png";
+      } else if (d == "right") {
+        head.src = "assets/image/snake-head-right.png";
+      } else if (d == "left") {
+        head.src = "assets/image/snake-head-left.png";
+      }
     }
     paintRect(head, x, y)
   }
