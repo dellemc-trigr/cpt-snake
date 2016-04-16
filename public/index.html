@@ -13,7 +13,7 @@
     <meta name="twitter:site" content="@EmcDojo">
     <meta name="twitter:creator" content="@EmcDojo">
     <meta name="twitter:title" content="Play DOJOSNAKE by the EMC Dojo">
-    <meta name="twitter:description" content=" DOJOSNAKE is running on Cloud Foundry powered by Virtustream, EMC Native Hybrid Cloud, and the EMC Dojo. If you’re at EMC World, get to #1 on the leaderboard and you can win a prize!">
+    <meta name="twitter:description" content="DOJOSNAKE is running on Cloud Foundry powered by Virtustream, EMC Native Hybrid Cloud, and the EMC Dojo. If you’re at EMC World, get to #1 on the leaderboard and you can win a prize!">
     <meta name="twitter:image" content="assets/image/dojo.png">
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -21,7 +21,11 @@
   <body>
     <div id="snakeContainer" class="row">
       <canvas id="snakeCanvas"></canvas>
-      <div id="gameOver">Game Over!</div>
+      <div id="gameOverContainer" style="display: none">
+        <div id="gameOver">Game Over!</div>
+        <div id="tweet">Tweet Us!</div>
+        <div id="restart">Restart</div>
+      </div>
     </div>
 
     <div id="foot" class="row">
