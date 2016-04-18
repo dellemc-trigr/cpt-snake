@@ -17,18 +17,46 @@ img {
   height: 100%;
 }
 
+#snakeCanvas {
+  position: absolute;
+  width: 90%;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-style: solid;
+  border-width: 5px;
+  color: #039be5;
+
+}
+
 #snakeContainer {
   width: 100%;
   position: absolute;
   top: 0;
   bottom: 5%;
-  border-bottom: medium solid #888888;
+  border-bottom: medium solid #039be5;
+  background-image: url("../image/white.png");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
 }
 
 #foot {
   position: absolute;
   max-height: 5%;
   bottom: 0;
+  width: 100%;
+}
+
+#logo_bar {
+  width: 40%;
+  float: right;
+}
+
+.logo{
+  height: 100%;
+  width: 25%;
+  float: right;
+
 }
 
 #gameOverContainer {
@@ -39,6 +67,7 @@ img {
     top: 50%;
     transform: translate(-50%, -50%);
     font-family: LVDCGameOver;
+    display: none;
 }
 
 #gameOver {
@@ -54,6 +83,7 @@ img {
 #restart {
   margin-top: 8%;
   font-size: 2.8vw;
+  cursor:pointer;
 }
 
 .footers {

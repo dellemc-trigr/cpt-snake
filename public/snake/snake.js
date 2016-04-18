@@ -11,13 +11,14 @@ $(document).ready(function() {
   var snake_array; //an array of cells to make up the snake
   var game_loop;
   var timeMark = (new Date()).getTime();
-  console.log("TimeMark: " + timeMark);
+  var shouldSetInterval = true;
+  var paused = false;
 
   var directions = ["right", "down", "left", "up"];
 
   twitter = $("#twitterButton");
   twitter.attr("data-text", "I just #CFpush my first app #pairprogramming with @EMCDojo & #CloudFoundry at #EMCWorld. Click to play #dojosnake.");
-  twitter.attr("data-url", "http://dojo-snake.52.71.136.166.xip.io/");
+  twitter.attr("data-url", "http://dojo-snake.pcf.beta.virtustream.com/");
   twitter.attr("data-related", "EmcDojo");
 
   var heads;
@@ -29,8 +30,7 @@ $(document).ready(function() {
   var hamster;
   var explosion;
 
-  drawCanvas();
-
+    drawCanvas();
   //-----------------HELPER FUNCTIONS GO HERE------------
   function drawCanvas() {
     var width = $(container).width();
@@ -59,14 +59,25 @@ $(document).ready(function() {
     apple = initApple();
     hamster = initBonusFood();
     explosion = initExplosion();
+    paused = false;
 
     paintBackgroundImage(background, w, h)
+    drawGame(w,h);
+  }
 
+  function drawGame(w,h){
     //Lets move the snake now using a timer which will trigger the paint function
     //every 60ms
-    game_loop = setInterval(function() {
-      paint(w, h);
-    }, 150);
+    if(shouldSetInterval){
+      game_loop = setInterval(function() {
+        if(!paused){
+          paint(w, h);
+        }
+      }, 150);
+
+      shouldSetInterval = false;
+    }
+    return;
   }
 
   function createSnake() {
@@ -137,12 +148,18 @@ $(document).ready(function() {
     ctx.font="2vw LVDCGameOver";
     ctx.fillStyle="white";
     ctx.fillText(score_text, 5, h-5);
+    return;
   }
 
   function endGame(nx, ny, w, h) {
-    clearInterval(game_loop);
-    paintBackgroundImage(gameoverBackground, w, h);
+    paused = true;
+    $("#restart").click(function () {
+      $("#gameOverContainer").attr("style", "display: none");
+      paused = false;
+      drawCanvas();
+    });
 
+    paintBackgroundImage(gameoverBackground, w, h);
     var head = snake_array[0];
     paintHead(head.x, head.y);
     for(var i = 1; i < snake_array.length-1; i++) {
@@ -152,19 +169,33 @@ $(document).ready(function() {
     var tail = snake_array[snake_array.length-1];
     paintTail(tail.x, tail.y);
 
-    console.log("IM HEREEREERRE");
+    //Lets paint the score
+    var score_text = "Score: " + score;
+    ctx.font="2vw LVDCGameOver";
+    ctx.fillStyle="white";
+    ctx.fillText(score_text, 5, h-5);
+
     paintExplosion(nx, ny);
+
     $("#gameOverContainer").attr("style", "display: block");
 
     var gameOverText = document.getElementById('gameOver');
     if(gameOverText) {
       gameOverText.className += gameOverText.className ? ' blink' : 'blink';
     }
+
+    document.domain = "virtustream.com";
+    $.get(
+      "backend/index.json",
+      function(data) {
+        alert("Response: " + data);
+      }
+    );
+    return;
   }
 
   //Lets create the food now
   function createFood(foodTypeString, w, h) {
-    console.log(foodTypeString);
     if (foodTypeString == "bonusFood") {
       bonusFood = {
         x: Math.round(Math.random()*(w-cw)/cw),

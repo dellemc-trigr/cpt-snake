@@ -7,6 +7,7 @@
     <!-- Jquery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
     <script src="https://rawgithub.com/icoxfog417/temporaryCDN/master/quojs/quo.js" type="text/javascript"></script>
+    <script type="text/javascript" async src="https://platform.twitter.com/widgets.js"></script>
     <script src="snake/snake.js" type="text/javascript"></script>
 
     <meta name="twitter:card" content="summary_large_image">
@@ -21,9 +22,11 @@
   <body>
     <div id="snakeContainer" class="row">
       <canvas id="snakeCanvas"></canvas>
-      <div id="gameOverContainer" style="display: none">
+      <div id="gameOverContainer">
         <div id="gameOver">Game Over!</div>
-        <div id="tweet">Tweet Us!</div>
+        <div id="tweet">
+          <a href="https://twitter.com/intent/tweet?text=I%20just%20%23CFpush%20my%20first%20app%20%23pairprogramming%20with%20%40EMCDojo%20%26%20%23CloudFoundry%20at%20%23EMCWorld.%20Click%20to%20play%20%23dojosnake.&url=http%3A%2F%2Fdojo-snake.pcf.beta.virtustream.com%2F&related=emcdojo">Tweet Us!</a>
+        </div>
         <div id="restart">Restart</div>
       </div>
     </div>
@@ -33,29 +36,30 @@
         <a id="twitterButton" href="https://twitter.com/share" class="twitter-share-button" data-text="" data-url="" data-size="large" data-related="EmcDojo">Tweet</a>
         <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
       </div>
+      <div id="logo_bar" class="col">
+        <div class="logo">
+          <a href="http://dojoblog.emc.com" target="_blank">
+            <img class="responsive-img" src="assets/image/dojo.png">
+          </a>
+        </div>
 
-      <div class="col s2 m1 l1 offset-l6 offset-m5">
-        <a href="http://dojoblog.emc.com" target="_blank">
-          <img class="responsive-img" src="assets/image/dojo.png">
-        </a>
-      </div>
+        <div class="logo">
+          <a href="http://www.emc.com/en-us/index.htm" target="_blank">
+            <img class="responsive-img" src="assets/image/emc.jpg">
+          </a>
+        </div>
 
-      <div class="col s2 m1 l1">
-        <a href="http://www.emc.com/en-us/index.htm" target="_blank">
-          <img class="responsive-img" src="assets/image/emc.png">
-        </a>
-      </div>
+        <div class="logo">
+          <a href="http://www.virtustream.com" target="_blank">
+            <img class="responsive-img" src="assets/image/virtustream.png">
+          </a>
+        </div>
 
-      <div class="col s2 m1 l1">
-        <a href="http://www.virtustream.com" target="_blank">
-          <img class="responsive-img" src="assets/image/virtustream.png">
-        </a>
-      </div>
-
-      <div class="col s2 m1 l1">
-        <a href="http://pivotal.io/platform" target="_blank">
-          <img class="responsive-img" src="assets/image/cloudfoundry.png">
-        </a>
+        <div class="logo">
+          <a href="http://pivotal.io/platform" target="_blank">
+            <img class="responsive-img" src="assets/image/cloudfoundry.png">
+          </a>
+        </div>
       </div>
     </div>
   </body>
