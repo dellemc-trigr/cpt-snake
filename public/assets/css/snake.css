@@ -3,6 +3,11 @@
     src: url(../fonts/LVDCGO.TTF);
 }
 
+@font-face {
+    font-family: 1STSORTI;
+    src: url(../fonts/1STSORTI.TTF);
+};
+
 html, body {
   height: 100vh;
   padding: 0;
@@ -27,6 +32,11 @@ img {
   border-width: 5px;
   color: #039be5;
 
+}
+
+a[disabled="disabled"] {
+  pointer-events: none;
+  cursor: default;
 }
 
 #snakeContainer {
@@ -76,16 +86,86 @@ img {
 }
 
 #tweet {
-  margin-top: 7%;
-  font-size: 3vw;
+  font-family: 1STSORTI;
+  font-size: 1.5em;
   color:#1DA1F2;
   display: none;
+  padding-top: 3rem;
 }
 
 #action {
-  margin-top: 8%;
   font-size: 2.8vw;
-  cursor:pointer;
+  cursor: pointer;
+  clear: both;
+}
+
+#leaderTitle {
+}
+
+#leaders {
+  display: table;
+  opacity: 0;
+  margin: 0 auto;
+}
+
+#leaders ol {
+  max-width: 56em;
+  text-align: center;
+  padding: 0;
+  float: left;
+}
+
+#leaders ol li {
+  list-style-type: none;
+  padding:0;
+  margin:0;
+  height: 1.5em;
+  width: 28em;
+  float: left;
+}
+
+#userHandle {
+  width: 16em;
+  background-color: rgba(249, 253, 255, 0.71);
+  border-radius: 0.7em;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+  font-family: sans-serif;
+}
+
+#sendTweet {
+  font-size: 1rem;
+}
+.sendTweetImg {
+  height: 4rem;
+  background-color: rgba(255, 255, 255, 0.52);
+  border-radius: 5rem;
+
+
+}
+
+::-webkit-input-placeholder {
+  color: blue;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+  color: blue;
+}
+
+::-moz-placeholder { /* Firefox 19+ */
+  color: blue;
+}
+
+:-ms-input-placeholder { /* IE 10+ */
+  color: blue;
+}
+
+::-ms-input-placeholder { /* Edge */
+  color: blue;
+}
+
+:placeholder-shown { /* Standard one last! */
+  color: blue;
 }
 
 .footers {
@@ -101,6 +181,16 @@ img {
         opacity: 1.0;
     }
 }
+
+#leaders.fadeIn {
+  opacity: 1.0;
+}
+
+.fadeIn {
+    -webkit-animation-name: blink;
+    -webkit-animation-duration: 1s;
+}
+
 .blink {
     -webkit-animation-name: blink;
     -webkit-animation-iteration-count: infinite;

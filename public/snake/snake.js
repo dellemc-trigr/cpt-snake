@@ -56,6 +56,7 @@ init();
     hamster = initBonusFood();
     explosion = initExplosion();
     document.getElementById('action').innerHTML = "Start!";
+    $('#userHandle').val('');
     paintBackgroundImage(background, w, h)
     drawGame(w,h);
   }
@@ -167,21 +168,18 @@ init();
 
     paintExplosion(nx, ny);
 
+    getLeaders().done(updateLeaderBoardDisplay);
+
     $("#menuContainer").attr("style", "display: block");
     $("#tweet").attr("style", "display:block");
+    $('#userHandle').keyup(validateHandle);
     $("#gameOver").attr("style", "display:block");
     var gameOverText = document.getElementById('gameOver');
     if(gameOverText) {
       gameOverText.className += gameOverText.className ? ' blink' : 'blink';
     }
 
-    document.domain = "virtustream.com";
-    $.get(
-      "backend/index.json",
-      function(data) {
-        alert("Response: " + data);
-      }
-    );
+
     return;
   }
 
@@ -278,6 +276,47 @@ init();
     return initImage(src);
   }
 
+  function getLeaders() {
+    return $.ajax({url: "/backend/index.json"});
+  }
+
+  function updateLeaderBoardDisplay(leaders) {
+    console.log(leaders);
+    var leaderDisplay = "<ol>";
+    $(leaders).each(function (i, leader) {
+      console.log(leader);
+      leaderDisplay += "<li>" + (i+1) + ".&nbsp;" +
+        "<span class=\"twitter_handle\">@" + leader.twitter_handle + "</span>" +
+        "&nbsp;&mdash;&nbsp;" +
+        "<span class=\"score\">" + leader.score + "</span>" +
+        "</li>"
+    });
+    leaderDisplay += "</ol>"
+    var leadersDiv = document.getElementById("leaders")
+    leadersDiv.innerHTML = leaderDisplay;
+
+    $(leadersDiv).addClass('fadeIn');
+  };
+
+  function validateHandle(event) {
+    if(event.target.value[0] == '@' && event.target.value.length > 1) {
+      $('#postLeader').removeAttr('disabled');
+    } else {
+      $('#postLeader').attr('disabled', true);
+    }
+  }
+
+  function postLeader(handle, score) {
+    return $.ajax({
+      type: 'POST',
+      url: '/backend/',
+      data: {
+        "token": token,
+        "leader": { "twitter_handle": handle, "score": score }
+      }
+    })
+  }
+
   function paintTail(x, y){
     ctx.drawImage(tail, x*cw, y*cw);
   }
@@ -345,11 +384,12 @@ init();
   $$('canvas').swipeRight(function(){ if(d != "left") d = "right"; });
   $$('canvas').swipeUp(function(){ if(d != "down") d = "up"; });
   $$('canvas').bind('touchstart', function(e){ e.preventDefault(); });
+  $("#postLeader").click(function () {
+    postLeader($('#userHandle').val().replace(/@/g,""), score);
+  });
 
   $("#action").click(function () {
-    $("#gameOver").attr("style", "display: none");
-    $("#tweet").attr("style", "display:none");
-    $("#action").attr("style", "display:none");
+    $("#menuContainer").attr("style", "display: none");
     paused = false;
     init();
   });
