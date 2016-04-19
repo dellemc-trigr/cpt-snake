@@ -59,7 +59,7 @@ img {
 
 }
 
-#gameOverContainer {
+#menuContainer {
     position: absolute;
     text-align: center;
     width: 100%;
@@ -67,10 +67,11 @@ img {
     top: 50%;
     transform: translate(-50%, -50%);
     font-family: LVDCGameOver;
-    display: none;
+    display: block;
 }
 
 #gameOver {
+  display:none;
   font-size: 3.5vw;
 }
 
@@ -78,9 +79,10 @@ img {
   margin-top: 7%;
   font-size: 3vw;
   color:#1DA1F2;
+  display: none;
 }
 
-#restart {
+#action {
   margin-top: 8%;
   font-size: 2.8vw;
   cursor:pointer;

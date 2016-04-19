@@ -12,7 +12,7 @@ $(document).ready(function() {
   var game_loop;
   var timeMark = (new Date()).getTime();
   var shouldSetInterval = true;
-  var paused = false;
+  var paused = true;
 
   var directions = ["right", "down", "left", "up"];
 
@@ -30,22 +30,18 @@ $(document).ready(function() {
   var hamster;
   var explosion;
 
-    drawCanvas();
-  //-----------------HELPER FUNCTIONS GO HERE------------
-  function drawCanvas() {
-    var width = $(container).width();
-    var height = $(container).height();
-    if(width > 1000) {
+init();
+
+  function init() {
+
+    var w = $(container).width();
+    var h = $(container).height();
+    if(w > 1000) {
       cw = 35
     }
-    canvas.attr('width', width); //max width
-    canvas.attr('height', height); //max height
+    canvas.attr('width', w); //max width
+    canvas.attr('height', h); //max height
 
-    //Everytime this window is resized, redraw snake game
-    init(width, height);
-  }
-
-  function init(w, h) {
     score = 0;
     d = "right"; //default direction
     createSnake();
@@ -59,8 +55,7 @@ $(document).ready(function() {
     apple = initApple();
     hamster = initBonusFood();
     explosion = initExplosion();
-    paused = false;
-
+    document.getElementById('action').innerHTML = "Start!";
     paintBackgroundImage(background, w, h)
     drawGame(w,h);
   }
@@ -74,7 +69,6 @@ $(document).ready(function() {
           paint(w, h);
         }
       }, 150);
-
       shouldSetInterval = false;
     }
     return;
@@ -153,12 +147,8 @@ $(document).ready(function() {
 
   function endGame(nx, ny, w, h) {
     paused = true;
-    $("#restart").click(function () {
-      $("#gameOverContainer").attr("style", "display: none");
-      paused = false;
-      drawCanvas();
-    });
-
+    document.getElementById('action').innerHTML = "Restart";
+    $("#action").attr("style", "display: block");
     paintBackgroundImage(gameoverBackground, w, h);
     var head = snake_array[0];
     paintHead(head.x, head.y);
@@ -177,8 +167,9 @@ $(document).ready(function() {
 
     paintExplosion(nx, ny);
 
-    $("#gameOverContainer").attr("style", "display: block");
-
+    $("#menuContainer").attr("style", "display: block");
+    $("#tweet").attr("style", "display:block");
+    $("#gameOver").attr("style", "display:block");
     var gameOverText = document.getElementById('gameOver');
     if(gameOverText) {
       gameOverText.className += gameOverText.className ? ' blink' : 'blink';
@@ -347,13 +338,21 @@ $(document).ready(function() {
   }
 
   //-----------------EVENT REGISTER GO HERE -------------
-  $(window).resize(drawCanvas);
+  $(window).resize(init);
 
   $$('canvas').swipeLeft(function(){ if(d != "right") d = "left"; });
   $$('canvas').swipeDown(function(){ if(d != "up") d = "down"; });
   $$('canvas').swipeRight(function(){ if(d != "left") d = "right"; });
   $$('canvas').swipeUp(function(){ if(d != "down") d = "up"; });
   $$('canvas').bind('touchstart', function(e){ e.preventDefault(); });
+
+  $("#action").click(function () {
+    $("#gameOver").attr("style", "display: none");
+    $("#tweet").attr("style", "display:none");
+    $("#action").attr("style", "display:none");
+    paused = false;
+    init();
+  });
 
   //Lets add the keyboard controls now
   $(document).keydown(function(e){
