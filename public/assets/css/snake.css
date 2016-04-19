@@ -39,6 +39,10 @@ a[disabled="disabled"] {
   cursor: default;
 }
 
+#postLeader {
+  display: inline-block;
+}
+
 #snakeContainer {
   width: 100%;
   position: absolute;

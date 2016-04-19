@@ -159,6 +159,7 @@ init();
     }
     var tail = snake_array[snake_array.length-1];
     paintTail(tail.x, tail.y);
+    initiatePostLeader();
 
     //Lets paint the score
     var score_text = "Score: " + score;
@@ -280,6 +281,25 @@ init();
     return $.ajax({url: "/backend/index.json"});
   }
 
+  var tweeted, followed;
+
+  function getTwitterHandle() {
+    return $('#userHandle').val().replace(/@/g,"");
+  }
+
+  function initiatePostLeader() {
+    tweeted = $.Deferred();
+    followed = $.Deferred();
+    $.when(tweeted, followed).done(postLeader);
+  };
+
+  twttr.events.bind(
+    'follow',
+    function (event) {
+      followed.resolve(score);
+    }
+  );
+
   function updateLeaderBoardDisplay(leaders) {
     console.log(leaders);
     var leaderDisplay = "<ol>";
@@ -385,9 +405,8 @@ init();
   $$('canvas').swipeUp(function(){ if(d != "down") d = "up"; });
   $$('canvas').bind('touchstart', function(e){ e.preventDefault(); });
   $("#postLeader").click(function () {
-    postLeader($('#userHandle').val().replace(/@/g,""), score);
+    tweeted.resolve(getTwitterHandle());
   });
-
   $("#action").click(function () {
     $("#menuContainer").attr("style", "display: none");
     paused = false;
