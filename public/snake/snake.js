@@ -292,10 +292,8 @@ init();
   );
 
   function updateLeaderBoardDisplay(leaders) {
-    console.log(leaders);
     var leaderDisplay = "<ol>";
     $(leaders).each(function (i, leader) {
-      console.log(leader);
       leaderDisplay += "<li>" + (i+1) + ".&nbsp;" +
         "<span class=\"twitter_handle\">@" + leader.twitter_handle + "</span>" +
         "&nbsp;&mdash;&nbsp;" +
