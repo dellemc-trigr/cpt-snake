@@ -201,3 +201,15 @@ a[disabled="disabled"] {
     -webkit-animation-timing-function: cubic-bezier(1.0, 0, 0, 1.0);
     -webkit-animation-duration: 1s;
 }
+#logo{
+  left: 50%;
+  top: 50%;
+  position: absolute;
+  transform: translate(-50%,-110%);
+  width: 70%;
+}
+
+.logo_img {
+  width:100%;
+  background-color: transparent;
+}

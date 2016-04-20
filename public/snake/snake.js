@@ -34,8 +34,8 @@ init();
 
   function init() {
 
-    var w = $(container).width();
-    var h = $(container).height();
+    var w = canvas[0].offsetWidth;
+    var h = canvas[0].offsetHeight;
     if(w > 1000) {
       cw = 35
     }
