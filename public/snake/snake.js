@@ -47,14 +47,14 @@ init();
     createSnake();
     createFood("food", w, h);
 
-    heads = initHeads();
-    tail = initTail();
-    body = initBody();
-    background = initBackgroundImage();
-    gameoverBackground = initGameOverBackground();
-    apple = initApple();
-    hamster = initBonusFood();
-    explosion = initExplosion();
+    heads = initHeads(-9999, -9999);
+    tail = initTail(-9999, -9999);
+    body = initBody(-9999, -9999);
+    background = initBackgroundImage(0, 0);
+    gameoverBackground = initGameOverBackground(-9999, -9999);
+    apple = initApple(-9999, -9999);
+    hamster = initBonusFood(-9999, -9999);
+    explosion = initExplosion(-9999, -9999);
     document.getElementById('action').innerHTML = "Start!";
     $('#userHandle').val('');
     paintBackgroundImage(background, w, h)
@@ -217,11 +217,12 @@ init();
     }
   }
 
-  function initApple(){
-    return initImage("assets/image/apple.png");
+  function initApple(x, y){
+    return initImage("assets/image/apple.png", x, y);
   }
-  function initBonusFood(){
-    return initImage("assets/image/hamster.png");
+
+  function initBonusFood(x, y){
+    return initImage("assets/image/hamster.png", x, y);
   }
 
   //Lets first create a generic function to paint cells
@@ -234,16 +235,16 @@ init();
     }
   }
 
-  function initImage(url) {
+  function initImage(url, x, y) {
     var image = new Image();
     image.onload = function() {
-      ctx.drawImage(image, 0, 0)
+      ctx.drawImage(image, x, y)
     }
     image.src = url;
     return image;
   }
 
-  function initHeads() {
+  function initHeads(x, y) {
     var heads = new Array();
     for(var i=0; i<4; i++) {
       var postfix = ".png";
@@ -251,7 +252,7 @@ init();
         postfix = "-small.png";
       }
       url = "assets/image/snake-head-"+directions[i]+postfix;
-      heads[i] = initImage(url);
+      heads[i] = initImage(url, x, y);
     }
     return heads;
   }
@@ -268,12 +269,12 @@ init();
     ctx.drawImage(heads[i], x*cw, y*cw);
   }
 
-  function initTail() {
+  function initTail(x, y) {
     var src = "assets/image/snake-tail.png";
     if (cw == 20) {
       src = "assets/image/snake-tail-small.png";
     }
-    return initImage(src);
+    return initImage(src, x, y);
   }
 
   function getLeaders() {
@@ -330,32 +331,32 @@ init();
     ctx.drawImage(tail, x*cw, y*cw);
   }
 
-  function initBody() {
+  function initBody(x, y) {
     var src = "assets/image/snake-body.png";
     if (cw == 20) {
       src = "assets/image/snake-body-small.png";
     }
-    return initImage(src);
+    return initImage(src, x, y);
   }
 
   function paintBody(x, y){
     ctx.drawImage(body, x*cw, y*cw);
   }
 
-  function initExplosion() {
+  function initExplosion(x, y) {
     var src = "assets/image/explosion.png";
     if (cw == 20) {
       src = "assets/image/explosion-small.png";
     }
-    return initImage(src);
+    return initImage(src, x, y);
   }
 
   function paintExplosion(x, y){
     ctx.drawImage(explosion, (x- 1/2)*cw, (y-1/2)*cw, cw*2, cw*2);
   }
 
-  function initBackgroundImage() {
-    return initImage("assets/image/background.jpg");
+  function initBackgroundImage(x, y) {
+    return initImage("assets/image/background.jpg", x, y);
   }
 
   function paintBackgroundImage(background, w, h) {
@@ -371,8 +372,8 @@ init();
     }
   }
 
-  function initGameOverBackground() {
-    return initImage("assets/image/gameover.jpg");
+  function initGameOverBackground(x, y) {
+    return initImage("assets/image/gameover.jpg", x, y);
   }
 
   function checkCollision(x, y, array) {
