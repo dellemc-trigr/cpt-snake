@@ -15,7 +15,6 @@ $(document).ready(function() {
   var paused = true;
 
   var directions = ["right", "down", "left", "up"];
-
   twitter = $("#twitterButton");
   twitter.attr("data-text", "I just #CFpush my first app #pairprogramming with @EMCDojo & #CloudFoundry at #EMCWorld. Click to play #dojosnake.");
   twitter.attr("data-url", "http://dojo-snake.pcf.beta.virtustream.com/");
@@ -30,12 +29,13 @@ $(document).ready(function() {
   var hamster;
   var explosion;
 
-init();
+  init();
+
 
   function init() {
-
-    var w = canvas[0].offsetWidth;
-    var h = canvas[0].offsetHeight;
+    var container = $(canvas).parent();
+    var w = $(container).width();
+    var h = $(container).height();
     if(w > 1000) {
       cw = 35
     }
@@ -55,18 +55,21 @@ init();
     apple = initApple(-9999, -9999);
     hamster = initBonusFood(-9999, -9999);
     explosion = initExplosion(-9999, -9999);
-    document.getElementById('action').innerHTML = "Start!";
+    $("#action").html("Start!");
     $('#userHandle').val('');
-    paintBackgroundImage(background, w, h)
-    drawGame(w,h);
+    paintBackgroundImage(background, w, h);
+
+    drawGame(container);
   }
 
-  function drawGame(w,h){
+  function drawGame(container){
     //Lets move the snake now using a timer which will trigger the paint function
     //every 60ms
     if(shouldSetInterval){
       game_loop = setInterval(function() {
         if(!paused){
+          var w = $(container).width();
+          var h = $(container).height();
           paint(w, h);
         }
       }, 150);
@@ -100,6 +103,7 @@ init();
     //This will restart the game if the snake hits the wall
     //Lets add the code for body collision
     //Now if the head of the snake bumps into its body, the game will restart
+
     if(nx == -1 || nx >= Math.round(w/cw) || ny == -1 || ny >= Math.round(h/cw) || checkCollision(nx, ny, snake_array)) {
       var head = snake_array[0];
       endGame(head.x, head.y, w, h);
@@ -148,7 +152,7 @@ init();
 
   function endGame(nx, ny, w, h) {
     paused = true;
-    document.getElementById('action').innerHTML = "Restart";
+    $("#action").html("Restart");
     $("#action").attr("style", "display: block");
     paintBackgroundImage(gameoverBackground, w, h);
     var head = snake_array[0];
@@ -167,18 +171,17 @@ init();
     ctx.fillText(score_text, 5, h-5);
 
     paintExplosion(nx, ny);
-
     getLeaders().done(updateLeaderBoardDisplay);
-
     $("#menuContainer").attr("style", "display: block");
     $("#tweet").attr("style", "display:block");
     $('#userHandle').keyup(validateHandle);
     $("#gameOver").attr("style", "display:block");
-    var gameOverText = document.getElementById('gameOver');
+
+    $("#gameOver").attr("style", "display:block");
+    var gameOverText = $('#gameOver');
     if(gameOverText) {
       gameOverText.className += gameOverText.className ? ' blink' : 'blink';
     }
-
 
     return;
   }
@@ -285,12 +288,12 @@ init();
     return $('#userHandle').val().replace(/@/g,"");
   }
 
-  twttr.events.bind(
-    'follow',
-    function (event) {
-      followed.resolve(score);
-    }
-  );
+  // twttr.events.bind(
+  //   'follow',
+  //   function (event) {
+  //     followed.resolve(score);
+  //   }
+  // );
 
   function updateLeaderBoardDisplay(leaders) {
     var leaderDisplay = "<ol>";
