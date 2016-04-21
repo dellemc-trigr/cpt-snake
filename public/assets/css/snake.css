@@ -1,3 +1,11 @@
+/* Large screens ----------- */
+@media only screen  and (min-width : 1000px) {
+/* Styles */
+  div#tweet, div#sendTweet, input#userHandle {
+    font-size: 1.0vw;
+  }
+}
+
 @font-face {
     font-family: LVDCGameOver;
     src: url(../fonts/LVDCGO.TTF);
@@ -32,6 +40,7 @@ img {
   left: 50%;
   margin-right: -50%;
   transform: translate(-50%, -50%);
+  border: 5px solid #039be5;
 }
 
 #snakeCanvas {
@@ -95,10 +104,11 @@ a[disabled="disabled"] {
 
 #tweet {
   font-family: 1STSORTI;
-  font-size: 1.5em;
-  color:#1DA1F2;
+  color: black;
   display: none;
-  padding-top: 3rem;
+  margin: auto;
+  max-width: 1294px;
+  font-size: 2.5vw;
 }
 
 #action {
@@ -133,23 +143,30 @@ a[disabled="disabled"] {
 }
 
 #userHandle {
-  width: 16em;
+  width: 25em;
   background-color: rgba(249, 253, 255, 0.71);
   border-radius: 0.7em;
   padding-left: 0.5em;
   padding-right: 0.5em;
+  font-size: 16px;
   font-family: sans-serif;
+}
+.twitter-follow-button {
+  transform: translate(0px, 10px);
 }
 
 #sendTweet {
-  font-size: 1rem;
+  font-size: 2vw;
 }
+
+a[disabled="disabled"] .sendTweetImg {
+  background-color: black;
+}
+
 .sendTweetImg {
   height: 4rem;
   background-color: rgba(255, 255, 255, 0.52);
-  border-radius: 5rem;
-
-
+  border-radius: 3rem;
 }
 
 ::-webkit-input-placeholder {

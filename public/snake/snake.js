@@ -33,6 +33,14 @@ $(document).ready(function() {
 
 
   function init() {
+    score = 0;
+    $("#action").html("Start!");
+    $('#userHandle').val('');
+
+    redraw();
+  }
+
+  function redraw() {
     var container = $(canvas).parent();
     var w = $(container).width();
     var h = $(container).height();
@@ -42,7 +50,6 @@ $(document).ready(function() {
     canvas.attr('width', w); //max width
     canvas.attr('height', h); //max height
 
-    score = 0;
     d = "right"; //default direction
     createSnake();
     createFood("food", w, h);
@@ -55,8 +62,6 @@ $(document).ready(function() {
     apple = initApple(-9999, -9999);
     hamster = initBonusFood(-9999, -9999);
     explosion = initExplosion(-9999, -9999);
-    $("#action").html("Start!");
-    $('#userHandle').val('');
     paintBackgroundImage(background, w, h);
 
     drawGame(container);
@@ -288,13 +293,6 @@ $(document).ready(function() {
     return $('#userHandle').val().replace(/@/g,"");
   }
 
-  // twttr.events.bind(
-  //   'follow',
-  //   function (event) {
-  //     followed.resolve(score);
-  //   }
-  // );
-
   function updateLeaderBoardDisplay(leaders) {
     var leaderDisplay = "<ol>";
     $(leaders).each(function (i, leader) {
@@ -390,7 +388,7 @@ $(document).ready(function() {
   }
 
   //-----------------EVENT REGISTER GO HERE -------------
-  $(window).resize(init);
+  $(window).resize(redraw);
 
   $$('canvas').swipeLeft(function(){ if(d != "right") d = "left"; });
   $$('canvas').swipeDown(function(){ if(d != "up") d = "down"; });
