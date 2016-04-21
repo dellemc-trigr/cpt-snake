@@ -1,8 +1,35 @@
 /* Large screens ----------- */
-@media only screen  and (min-width : 1000px) {
+@media only screen and (min-width: 1200px) and (orientation: portrait) {
 /* Styles */
-  div#tweet, div#sendTweet, input#userHandle {
+  div#tweet, div#sendTweet, input#userHandle{
     font-size: 1.0vw;
+  }
+
+  div#gameOver, div#action {
+    font-size: 1.2vw;
+  }
+}
+
+@media only screen and (max-width: 800px) and (orientation: portrait) {
+  div#gameOver, div#action {
+    font-size: 3.5vw;
+  }
+}
+
+@media only screen and (max-width: 800px) and (orientation: landscape) {
+  div#gameOver, div#action {
+    font-size: 1.5vw;
+  }
+  div#logo img.logo_img {
+    height: 20vh;
+  }
+
+  #leaders ol li {
+    font-size: 2.5vh;
+  }
+
+  div#tweet, div#sendTweet, input#userHandle{
+    font-size: 2.5vh;
   }
 }
 
@@ -26,8 +53,6 @@ html, body {
 img {
   background: #FFFFFF;
   vertical-align: middle;
-  /*box-shadow: 5px 5px 2px #888888;*/
-  height: 100%;
 }
 
 #snakeCanvasContainer {
@@ -44,6 +69,7 @@ img {
 }
 
 #snakeCanvas {
+
   color: #039be5;
 }
 
@@ -59,6 +85,7 @@ a[disabled="disabled"] {
 #snakeContainer {
   width: 100%;
   position: absolute;
+  z-index: -1;
   top: 0;
   bottom: 5%;
   border-bottom: medium solid #039be5;
@@ -86,12 +113,14 @@ a[disabled="disabled"] {
 
 }
 
-#menuContainer {
+#menuWrapper {
     position: absolute;
     text-align: center;
     width: 100%;
     left: 50%;
     top: 50%;
+    height: 100%;
+    max-height: 800px;
     transform: translate(-50%, -50%);
     font-family: LVDCGameOver;
     display: block;
@@ -99,7 +128,7 @@ a[disabled="disabled"] {
 
 #gameOver {
   display:none;
-  font-size: 3.5vw;
+  font-size: 1.5vw;
 }
 
 #tweet {
@@ -112,7 +141,7 @@ a[disabled="disabled"] {
 }
 
 #action {
-  font-size: 2.8vw;
+  font-size: 1.5vw;
   cursor: pointer;
   clear: both;
 }
@@ -122,12 +151,11 @@ a[disabled="disabled"] {
 
 #leaders {
   display: table;
-  opacity: 0;
   margin: 0 auto;
 }
 
 #leaders ol {
-  max-width: 56em;
+  width: 100%;
   text-align: center;
   padding: 0;
   float: left;
@@ -135,15 +163,15 @@ a[disabled="disabled"] {
 
 #leaders ol li {
   list-style-type: none;
+  width: 50%;
   padding:0;
   margin:0;
   height: 1.5em;
-  width: 28em;
   float: left;
 }
 
 #userHandle {
-  width: 25em;
+  width: 15em;
   background-color: rgba(249, 253, 255, 0.71);
   border-radius: 0.7em;
   padding-left: 0.5em;
@@ -223,14 +251,14 @@ a[disabled="disabled"] .sendTweetImg {
     -webkit-animation-duration: 1s;
 }
 #logo{
-  left: 50%;
-  top: 50%;
-  position: absolute;
-  transform: translate(-50%,-110%);
+  margin: 0 auto 0 auto;
   width: 70%;
 }
 
-.logo_img {
-  width:100%;
+img.logo_img {
+  display: block;
+  margin: auto;
+  height: 30vw;
+  max-height: 350px;
   background-color: transparent;
 }

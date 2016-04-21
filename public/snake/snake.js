@@ -63,7 +63,6 @@ $(document).ready(function() {
     hamster = initBonusFood(-9999, -9999);
     explosion = initExplosion(-9999, -9999);
     paintBackgroundImage(background, w, h);
-
     drawGame(container);
   }
 
@@ -157,6 +156,7 @@ $(document).ready(function() {
 
   function endGame(nx, ny, w, h) {
     paused = true;
+    $("#menuWrapper").show();
     $("#action").html("Restart");
     $("#action").attr("style", "display: block");
     paintBackgroundImage(gameoverBackground, w, h);
@@ -183,7 +183,7 @@ $(document).ready(function() {
     $("#gameOver").attr("style", "display:block");
 
     $("#gameOver").attr("style", "display:block");
-    var gameOverText = $('#gameOver');
+    var gameOverText = $('#gameOver')[0];
     if(gameOverText) {
       gameOverText.className += gameOverText.className ? ' blink' : 'blink';
     }
@@ -399,7 +399,7 @@ $(document).ready(function() {
     postLeader(getTwitterHandle(), score);
   });
   $("#action").click(function () {
-    $("#menuContainer").attr("style", "display: none");
+    $("#menuWrapper").hide();
     paused = false;
     init();
   });
