@@ -1,5 +1,5 @@
 /* Large screens ----------- */
-@media only screen and (min-width: 1200px) and (orientation: portrait) {
+@media only screen and (min-width: 1200px) {
 /* Styles */
   div#tweet, div#sendTweet, input#userHandle{
     font-size: 1.0vw;
