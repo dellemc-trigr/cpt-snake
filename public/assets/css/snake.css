@@ -1,8 +1,8 @@
 /* Large screens ----------- */
-@media only screen and (min-width: 1200px) {
+@media only screen and (min-width: 1000px) {
 /* Styles */
   div#tweet, div#sendTweet, input#userHandle{
-    font-size: 1.0vw;
+    font-size: 0.5vw;
   }
 
   div#gameOver, div#action {
@@ -12,26 +12,54 @@
 
 @media only screen and (max-width: 800px) and (orientation: portrait) {
   div#gameOver, div#action {
-    font-size: 3.5vw;
+    font-size: 3.0vw;
+  }
+
+  div#logo img.logo_img {
+    height: 20vw;
+  }
+
+  #leaders {
+    font-size: 2.3vw;
   }
 }
 
-@media only screen and (max-width: 800px) and (orientation: landscape) {
+@media only screen and (max-width: 1000px) and (orientation: landscape) {
   div#gameOver, div#action {
-    font-size: 1.5vw;
+    font-size: 2.5vh;
   }
+
   div#logo img.logo_img {
     height: 20vh;
   }
 
-  #leaders ol li {
-    font-size: 2.5vh;
+  div#tweet, div#sendTweet {
+    font-size: 2.0vh;
+  }
+
+  input#userHandle {
+    font-size: 3.0vh;
+  }
+
+  #leaders {
+    font-size: 2.0vh;
+  }
+}
+
+@media only screen and (min-width: 1000px) and (orientation: landscape) {
+  div#gameOver, div#action {
+    font-size: 2.0vh;
+  }
+
+  div#logo img.logo_img {
+    height: 30vh;
   }
 
   div#tweet, div#sendTweet, input#userHandle{
-    font-size: 2.5vh;
+    font-size: 1.2vh;
   }
 }
+
 
 @font-face {
     font-family: LVDCGameOver;
@@ -146,36 +174,16 @@ a[disabled="disabled"] {
   clear: both;
 }
 
-#leaderTitle {
-}
-
 #leaders {
   display: table;
   margin: 0 auto;
-}
-
-#leaders ol {
-  width: 100%;
-  text-align: center;
-  padding: 0;
-  float: left;
-}
-
-#leaders ol li {
-  list-style-type: none;
-  width: 50%;
-  padding:0;
-  margin:0;
-  height: 1.5em;
-  float: left;
+  padding-top: 2vh;
 }
 
 #userHandle {
   width: 15em;
   background-color: rgba(249, 253, 255, 0.71);
   border-radius: 0.7em;
-  padding-left: 0.5em;
-  padding-right: 0.5em;
   font-size: 16px;
   font-family: sans-serif;
 }
@@ -192,9 +200,9 @@ a[disabled="disabled"] .sendTweetImg {
 }
 
 .sendTweetImg {
-  height: 4rem;
+  height: 3rem;
   background-color: rgba(255, 255, 255, 0.52);
-  border-radius: 3rem;
+  border-radius: 2rem;
 }
 
 ::-webkit-input-placeholder {
@@ -235,10 +243,6 @@ a[disabled="disabled"] .sendTweetImg {
     }
 }
 
-#leaders.fadeIn {
-  opacity: 1.0;
-}
-
 .fadeIn {
     -webkit-animation-name: blink;
     -webkit-animation-duration: 1s;
@@ -258,7 +262,7 @@ a[disabled="disabled"] .sendTweetImg {
 img.logo_img {
   display: block;
   margin: auto;
-  height: 30vw;
+  height: 30vh;
   max-height: 350px;
   background-color: transparent;
 }

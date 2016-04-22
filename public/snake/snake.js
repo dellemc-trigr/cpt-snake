@@ -294,17 +294,16 @@ $(document).ready(function() {
   }
 
   function updateLeaderBoardDisplay(leaders) {
-    var leaderDisplay = "<ol>";
+    var leaderDisplay="";
     $(leaders).each(function (i, leader) {
-      leaderDisplay += "<li>" + (i+1) + ".&nbsp;" +
-        "<span class=\"twitter_handle\">@" + leader.twitter_handle + "</span>" +
-        "&nbsp;&mdash;&nbsp;" +
-        "<span class=\"score\">" + leader.score + "</span>" +
-        "</li>"
+      leaderDisplay += "<div class=\"col s12 m6 l6\">" + (i+1) + ".&nbsp;" +
+      "<span class=\"twitter_handle\">" + leader.twitter_handle + "</span>" +
+      "&nbsp;&mdash;&nbsp;" +
+      "<span class=\"score\">" + leader.score + "</span>" +
+      "</div>"
     });
-    leaderDisplay += "</ol>"
-    var leadersDiv = document.getElementById("leaders")
-    leadersDiv.innerHTML = leaderDisplay;
+    var leadersDiv = $("#leaders")
+    leadersDiv.html(leaderDisplay);
 
     $(leadersDiv).addClass('fadeIn');
   };
