@@ -36,7 +36,8 @@ $(document).ready(function() {
     score = 0;
     $("#action").html("Start!");
     $('#userHandle').val('');
-
+    d = "right"; //default direction
+    createSnake();
     redraw();
   }
 
@@ -50,10 +51,9 @@ $(document).ready(function() {
     canvas.attr('width', w); //max width
     canvas.attr('height', h); //max height
 
-    d = "right"; //default direction
-    createSnake();
-    createFood("food", w, h);
 
+
+    createFood("food", w, h);
     heads = initHeads(-9999, -9999);
     tail = initTail(-9999, -9999);
     body = initBody(-9999, -9999);
