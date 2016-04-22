@@ -1,12 +1,14 @@
 /* Large screens ----------- */
 @media only screen and (min-width: 1000px) {
 /* Styles */
-  div#tweet, div#sendTweet, input#userHandle{
-    font-size: 0.5vw;
+  div#tweet, div#sendTweet {
+    font-size: 1.0vw;
   }
-
+  input#userHandle {
+    font-size: 1.5vw;
+  }
   div#gameOver, div#action {
-    font-size: 1.2vw;
+    font-size: 1.8vw;
   }
 }
 
@@ -163,7 +165,7 @@ a[disabled="disabled"] {
   font-family: 1STSORTI;
   color: black;
   display: none;
-  margin: auto;
+  margin: 1vh auto;
   max-width: 1294px;
   font-size: 2.5vw;
 }
@@ -193,6 +195,19 @@ a[disabled="disabled"] {
 
 #sendTweet {
   font-size: 2vw;
+}
+
+#logo{
+  margin: 0 auto 0 auto;
+  width: 70%;
+}
+
+img.logo_img {
+  display: block;
+  margin: auto;
+  height: 30vh;
+  max-height: 350px;
+  background-color: transparent;
 }
 
 a[disabled="disabled"] .sendTweetImg {
@@ -253,16 +268,4 @@ a[disabled="disabled"] .sendTweetImg {
     -webkit-animation-iteration-count: infinite;
     -webkit-animation-timing-function: cubic-bezier(1.0, 0, 0, 1.0);
     -webkit-animation-duration: 1s;
-}
-#logo{
-  margin: 0 auto 0 auto;
-  width: 70%;
-}
-
-img.logo_img {
-  display: block;
-  margin: auto;
-  height: 30vh;
-  max-height: 350px;
-  background-color: transparent;
 }

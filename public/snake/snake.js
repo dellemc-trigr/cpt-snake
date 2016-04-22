@@ -38,6 +38,8 @@ $(document).ready(function() {
     $('#userHandle').val('');
     d = "right"; //default direction
     createSnake();
+    getLeaders().done(updateLeaderBoardDisplay);
+
     redraw();
   }
 
@@ -50,8 +52,6 @@ $(document).ready(function() {
     }
     canvas.attr('width', w); //max width
     canvas.attr('height', h); //max height
-
-
 
     createFood("food", w, h);
     heads = initHeads(-9999, -9999);
@@ -156,9 +156,7 @@ $(document).ready(function() {
 
   function endGame(nx, ny, w, h) {
     paused = true;
-    $("#menuWrapper").show();
-    $("#action").html("Restart");
-    $("#action").attr("style", "display: block");
+
     paintBackgroundImage(gameoverBackground, w, h);
     var head = snake_array[0];
     paintHead(head.x, head.y);
@@ -176,13 +174,16 @@ $(document).ready(function() {
     ctx.fillText(score_text, 5, h-5);
 
     paintExplosion(nx, ny);
-    getLeaders().done(updateLeaderBoardDisplay);
-    $("#menuContainer").attr("style", "display: block");
-    $("#tweet").attr("style", "display:block");
-    $('#userHandle').keyup(validateHandle);
-    $("#gameOver").attr("style", "display:block");
 
-    $("#gameOver").attr("style", "display:block");
+    $("#menuWrapper").show();
+    $("#menuContainer").show();
+    $("#tweet").show();
+    $("#gameOver").show();
+    $("#action").show();
+    $("#action").html("> Restart");
+    $("#leaders").hide();
+    $('#userHandle').keyup(validateHandle);
+
     var gameOverText = $('#gameOver')[0];
     if(gameOverText) {
       gameOverText.className += gameOverText.className ? ' blink' : 'blink';
@@ -302,10 +303,10 @@ $(document).ready(function() {
       "<span class=\"score\">" + leader.score + "</span>" +
       "</div>"
     });
-    var leadersDiv = $("#leaders")
-    leadersDiv.html(leaderDisplay);
+    var leaders = $("#leaders")
+    leaders.html(leaderDisplay);
 
-    $(leadersDiv).addClass('fadeIn');
+    $(leaders).show();
   };
 
   function validateHandle(event) {
