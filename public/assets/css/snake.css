@@ -77,7 +77,6 @@ html, body {
   height: 100vh;
   padding: 0;
   margin: 0;
-  position: relative;
 }
 
 img {
@@ -85,10 +84,20 @@ img {
   vertical-align: middle;
 }
 
+#snakeContainer {
+  position: relative;
+  width: 100vw;
+  height: 90vh;
+  border-bottom: medium solid #039be5;
+  background-image: url("../image/white.png");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+
 #snakeCanvasContainer {
-  position: absolute;
+  position: relative;
   width: 100%;
-  height: 100%;
+  height: 90vh;
   max-width: 1294px;
   max-height: 800px;
   top: 50%;
@@ -99,7 +108,6 @@ img {
 }
 
 #snakeCanvas {
-
   color: #039be5;
 }
 
@@ -112,35 +120,10 @@ a[disabled="disabled"] {
   display: inline-block;
 }
 
-#snakeContainer {
+#footer {
+  position: relative;
+  height: 10vh;
   width: 100%;
-  position: absolute;
-  z-index: -1;
-  top: 0;
-  bottom: 5%;
-  border-bottom: medium solid #039be5;
-  background-image: url("../image/white.png");
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
-}
-
-#foot {
-  position: absolute;
-  max-height: 5%;
-  bottom: 0;
-  width: 100%;
-}
-
-#logo_bar {
-  width: 40%;
-  float: right;
-}
-
-.logo{
-  height: 100%;
-  width: 25%;
-  float: right;
-
 }
 
 #menuWrapper {
@@ -179,7 +162,6 @@ a[disabled="disabled"] {
 #leaders {
   display: table;
   margin: 0 auto;
-  padding-top: 2vh;
 }
 
 #userHandle {
@@ -242,11 +224,6 @@ a[disabled="disabled"] .sendTweetImg {
 
 :placeholder-shown { /* Standard one last! */
   color: blue;
-}
-
-.footers {
-  max-height: 5%;
-  vertical-align: middle;
 }
 
 @-webkit-keyframes blink {
