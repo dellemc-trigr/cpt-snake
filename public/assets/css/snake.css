@@ -81,7 +81,7 @@ img {
 #snakeContainer {
   position: relative;
   width: 100vw;
-  height: 90vh;
+  height: 93vh;
   border-bottom: medium solid #039be5;
   background-image: url("../image/white.png");
   background-size: 100% 100%;
@@ -91,7 +91,7 @@ img {
 #snakeCanvasContainer {
   position: relative;
   width: 100%;
-  height: 90vh;
+  height: 93vh;
   max-width: 1294px;
   max-height: 800px;
   top: 50%;
@@ -104,7 +104,7 @@ img {
 #gameBoard {
   position: absolute;
   width: 100%;
-  height: 90vh;
+  height: 93vh;
   max-width: 1294px;
   max-height: 800px;
 
@@ -129,7 +129,7 @@ img {
 
 #footer {
   position: relative;
-  height: 10vh;
+  height: 7vh;
   width: 100%;
 }
 
@@ -165,12 +165,7 @@ img {
   clear: both;
 }
 
-#leaders {
-  display: table;
-  margin: 0 auto;
-}
-
-.twitter-follow-button {
+#tweet .twitter-follow-button {
   transform: translate(0px, 10px);
 }
 
@@ -244,4 +239,13 @@ a[disabled="disabled"] .sendTweetImg {
 
 #actionItems {
   text-align: left;
+}
+
+#footer img {
+  width: 75%;
+  margin: 0 auto;
+}
+
+#anytimeTweet {
+  padding: 2vh;
 }

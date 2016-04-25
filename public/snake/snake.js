@@ -182,7 +182,7 @@ $(document).ready(function() {
     $("#gameOver").show();
     $("#action").show();
     $("#action").html("> Restart");
-    $("#leaders").hide();
+    $("#leaderBoard").hide();
 
 
     var gameOverText = $('#gameOver')[0];
@@ -298,20 +298,27 @@ $(document).ready(function() {
   function updateLeaderBoardDisplay(leaders) {
     var leaderDisplay="";
     $(leaders).each(function (i, leader) {
-      leaderDisplay += "<div class=\"col s12 m6 l6\">" + (i+1) + ".&nbsp;" +
+      leaderDisplay += "<div class=\"col-xs-6 col-xs-offset-3\">" + (i+1) + ".&nbsp;" +
       "<span class=\"twitter_handle\">" + leader.twitter_handle + "</span>" +
       "&nbsp;&mdash;&nbsp;" +
       "<span class=\"score\">" + leader.score + "</span>" +
       "</div>"
     });
     var leaders = $("#leaders")
-    leaders.html(leaderDisplay);
+    if(leaders.size != 0) {
+      leaders.html(leaderDisplay);
+    } else {
+      var none ="<div class=\"col-xs-6 col-xs-offset-3\">" +
+        "&lt;none&gt;" +
+      "</div>"
+      leaders.html(none);
+    }
 
     $(leaders).show();
   };
 
   function validateHandle(event) {
-    if($('#userHandle')[0].value[0] == '@' && $('#userHandle')[0].value.length > 1) {
+    if(getTwitterHandle().length > 0) {
       $('#joinButton').removeClass('disabled');
     } else {
       $('#joinButton').addClass('disabled');
@@ -346,7 +353,7 @@ $(document).ready(function() {
     ctx.drawImage(body, x*cw, y*cw);
     ctx.font="20px Tahoma";
     var printedName = name + " ";
-    ctx.fillText(printedName[i%(printedName.length)];,x*cw+(body.width/2)-4,y*cw+(body.height/2)+4);
+    ctx.fillText(printedName[i%(printedName.length)],x*cw+(body.width/2)-4,y*cw+(body.height/2)+4);
   }
 
   function initExplosion(x, y) {
