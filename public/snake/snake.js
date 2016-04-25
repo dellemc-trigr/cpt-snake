@@ -28,9 +28,9 @@ $(document).ready(function() {
   var apple;
   var hamster;
   var explosion;
+  var name="Victor";
 
   init();
-
 
   function init() {
     score = 0;
@@ -138,7 +138,7 @@ $(document).ready(function() {
     paintHead(head.x, head.y);
     for(var i = 1; i < snake_array.length-1; i++) {
       var body = snake_array[i];
-      paintBody(body.x, body.y);
+      paintBody(body.x, body.y, i-1);
     }
     var tail = snake_array[snake_array.length-1];
     paintTail(tail.x, tail.y);
@@ -163,7 +163,7 @@ $(document).ready(function() {
     paintHead(head.x, head.y);
     for(var i = 1; i < snake_array.length-1; i++) {
       var body = snake_array[i];
-      paintBody(body.x, body.y);
+      paintBody(body.x, body.y, i-1);
     }
     var tail = snake_array[snake_array.length-1];
     paintTail(tail.x, tail.y);
@@ -342,8 +342,11 @@ $(document).ready(function() {
     return initImage(src, x, y);
   }
 
-  function paintBody(x, y){
+  function paintBody(x, y, i){
     ctx.drawImage(body, x*cw, y*cw);
+    ctx.font="20px Tahoma";
+    var printedName = name + " ";
+    ctx.fillText(printedName[i%(printedName.length)];,x*cw+(body.width/2)-4,y*cw+(body.height/2)+4);
   }
 
   function initExplosion(x, y) {
