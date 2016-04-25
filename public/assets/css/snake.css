@@ -4,9 +4,7 @@
   div#tweet, div#sendTweet {
     font-size: 1.0vw;
   }
-  input#userHandle {
-    font-size: 1.5vw;
-  }
+
   div#gameOver, div#action {
     font-size: 1.8vw;
   }
@@ -39,10 +37,6 @@
     font-size: 2.0vh;
   }
 
-  input#userHandle {
-    font-size: 3.0vh;
-  }
-
   #leaders {
     font-size: 2.0vh;
   }
@@ -57,7 +51,7 @@
     height: 30vh;
   }
 
-  div#tweet, div#sendTweet, input#userHandle{
+  div#tweet, div#sendTweet {
     font-size: 1.2vh;
   }
 }
@@ -107,13 +101,26 @@ img {
   border: 5px solid #039be5;
 }
 
+#gameBoard {
+  position: absolute;
+  width: 100%;
+  height: 90vh;
+  max-width: 1294px;
+  max-height: 800px;
+
+  top: 50%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+  border: 5px solid #039be5;
+}
+
 #snakeCanvas {
   color: #039be5;
 }
 
-a[disabled="disabled"] {
+.disabled {
   pointer-events: none;
-  cursor: default;
 }
 
 #postLeader {
@@ -148,12 +155,11 @@ a[disabled="disabled"] {
   font-family: 1STSORTI;
   color: black;
   display: none;
-  margin: 1vh auto;
   max-width: 1294px;
-  font-size: 2.5vw;
 }
 
 #action {
+  padding-top: 5vh;
   font-size: 1.5vw;
   cursor: pointer;
   clear: both;
@@ -164,19 +170,8 @@ a[disabled="disabled"] {
   margin: 0 auto;
 }
 
-#userHandle {
-  width: 15em;
-  background-color: rgba(249, 253, 255, 0.71);
-  border-radius: 0.7em;
-  font-size: 16px;
-  font-family: sans-serif;
-}
 .twitter-follow-button {
   transform: translate(0px, 10px);
-}
-
-#sendTweet {
-  font-size: 2vw;
 }
 
 #logo{
@@ -245,4 +240,8 @@ a[disabled="disabled"] .sendTweetImg {
     -webkit-animation-iteration-count: infinite;
     -webkit-animation-timing-function: cubic-bezier(1.0, 0, 0, 1.0);
     -webkit-animation-duration: 1s;
+}
+
+#actionItems {
+  text-align: left;
 }

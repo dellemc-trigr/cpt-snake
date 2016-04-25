@@ -36,6 +36,7 @@ $(document).ready(function() {
     score = 0;
     $("#action").html("Start!");
     $('#userHandle').val('');
+    $('#successMessage').addClass('hidden');
     d = "right"; //default direction
     createSnake();
     getLeaders().done(updateLeaderBoardDisplay);
@@ -175,14 +176,14 @@ $(document).ready(function() {
 
     paintExplosion(nx, ny);
 
-    $("#menuWrapper").show();
+    $("#gameBoard").show();
     $("#menuContainer").show();
     $("#tweet").show();
     $("#gameOver").show();
     $("#action").show();
     $("#action").html("> Restart");
     $("#leaders").hide();
-    $('#userHandle').keyup(validateHandle);
+
 
     var gameOverText = $('#gameOver')[0];
     if(gameOverText) {
@@ -310,21 +311,22 @@ $(document).ready(function() {
   };
 
   function validateHandle(event) {
-    if(event.target.value[0] == '@' && event.target.value.length > 1) {
-      $('#postLeader').removeAttr('disabled');
+    if($('#userHandle')[0].value[0] == '@' && $('#userHandle')[0].value.length > 1) {
+      $('#joinButton').removeClass('disabled');
     } else {
-      $('#postLeader').attr('disabled', true);
+      $('#joinButton').addClass('disabled');
     }
   }
 
-  function postLeader(handle, score) {
+  function postLeader(handle, score, callback) {
     return $.ajax({
       type: 'POST',
       url: '/backend/',
       data: {
         "token": token,
         "leader": { "twitter_handle": handle, "score": score }
-      }
+      },
+      success: callback
     })
   }
 
@@ -395,11 +397,22 @@ $(document).ready(function() {
   $$('canvas').swipeRight(function(){ if(d != "left") d = "right"; });
   $$('canvas').swipeUp(function(){ if(d != "down") d = "up"; });
   $$('canvas').bind('touchstart', function(e){ e.preventDefault(); });
-  $("#postLeader").click(function () {
-    postLeader(getTwitterHandle(), score);
+  $("#joinButton").click(function () {
+    $('#joinButton, #userHandle').addClass('disabled');
+    postLeader(getTwitterHandle(), score, function () {
+      $('#joinFormGroup').addClass('has-success');
+      $('#successMessage').removeClass('hidden');
+      $('#userHandle').removeClass('disabled');
+    });
   });
+
+  $('#userHandle').keyup(function () {
+    $('#successMessage').addClass('hidden');
+    validateHandle();
+  });
+
   $("#action").click(function () {
-    $("#menuWrapper").hide();
+    $("#gameBoard").hide();
     paused = false;
     init();
   });

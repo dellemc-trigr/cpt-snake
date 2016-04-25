@@ -1,30 +1,33 @@
 <!DOCTYPE html>
 <html>
-  <head>
+
+<head>
     <title>EMC Dojo Snake!</title>
     <link rel="stylesheet" href="assets/css/snake.css">
     <!-- <link rel="stylesheet" href="assets/css/materialize.css"> -->
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
     <script type="text/javascript">
-      var token = "4505d16a-230b-4832-b521-93499f696bb3";
+        var token = "4505d16a-230b-4832-b521-93499f696bb3";
     </script>
-    <script>window.twttr = (function(d, s, id) {
-      var js, fjs = d.getElementsByTagName(s)[0],
-        t = window.twttr || {};
-      if (d.getElementById(id)) return t;
-      js = d.createElement(s);
-      js.id = id;
-      js.src = "https://platform.twitter.com/widgets.js";
-      fjs.parentNode.insertBefore(js, fjs);
+    <script>
+        window.twttr = (function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0],
+                t = window.twttr || {};
+            if (d.getElementById(id)) return t;
+            js = d.createElement(s);
+            js.id = id;
+            js.src = "https://platform.twitter.com/widgets.js";
+            fjs.parentNode.insertBefore(js, fjs);
 
-      t._e = [];
-      t.ready = function(f) {
-        t._e.push(f);
-      };
+            t._e = [];
+            t.ready = function(f) {
+                t._e.push(f);
+            };
 
-      return t;
-    }(document, "script", "twitter-wjs"));</script>
+            return t;
+        }(document, "script", "twitter-wjs"));
+    </script>
     <!-- Jquery -->
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
@@ -42,60 +45,87 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  </head>
-  <body>
+</head>
+
+<body>
     <div id="snakeContainer">
-      <div id="snakeCanvasContainer">
-        <canvas id="snakeCanvas"></canvas>
-      </div>
-      <div id="menuWrapper">
-        <div id="logo">
-          <img class="logo_img" src="assets/image/logo.png">
+        <div id="snakeCanvasContainer">
+          <canvas id="snakeCanvas"></canvas>
         </div>
-        <div id="menuContainer">
+        <div id="gameBoard" class="container">
+            <div id="menuWrapper">
+                <div id="logo">
+                    <img class="logo_img" src="assets/image/logo.png">
+                </div>
+                <div id="menuContainer">
 
-          <div id="leaderBoard">
-            <div id="leaders" class="row">
+                    <div id="leaderBoard">
+                        <div id="leaders" class="row">
+                        </div>
+                    </div>
+
+                    <div id="gameOver">Game Over</div>
+                    <div id="tweet">
+                        <div class="row">
+                            <div class="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-4" style="text-align: left">
+                                1. Tweet
+                                <a id="postLeader" href="https://twitter.com/intent/tweet?text=I%20just%20%23CFpush%20my%20first%20app%20%23pairprogramming%20with%20%40EMCDojo%20%26%20%23CloudFoundry%20at%20%23EMCWorld.%20Click%20to%20play%20%23dojosnake.&url=http%3A%2F%2Fdojo-snake.pcf.beta.virtustream.com%2F&related=emcdojo">
+                                    <img class="sendTweetImg" src="assets/image/twitter.png">
+                                </a>
+                                <br/> 2. Follow
+                                <a href="https://twitter.com/EmcDojo" class="twitter-follow-button" data-show-count="false" data-size="large" data-show-screen-name="false">Follow @EmcDojo</a>
+                                <script>
+                                    ! function(d, s, id) {
+                                        var js, fjs = d.getElementsByTagName(s)[0],
+                                            p = /^http:/.test(d.location) ? 'http' : 'https';
+                                        if (!d.getElementById(id)) {
+                                            js = d.createElement(s);
+                                            js.id = id;
+                                            js.src = p + '://platform.twitter.com/widgets.js';
+                                            fjs.parentNode.insertBefore(js, fjs);
+                                        }
+                                    }(document, 'script', 'twitter-wjs');
+                                </script>
+                                <br/>
+                                <br/> 3. Join our leaderboard
+                                <br/>
+                            </div>
+                        </div>
+                        <!-- Simple Textfield -->
+                        <div id="sendTweet" class="row">
+                            <div class="col-lg-4 col-lg-offset-4 col-md-4 col-md-offset-4 col-sm-4 col-sm-offset-4 col-xs-10 col-xs-offset-1">
+                                <div class="form-group" id="joinFormGroup">
+                                  <div class="input-group" id="joinInputGroup">
+                                      <input type="text" class="form-control" id="userHandle" />
+                                      <span class="input-group-btn">
+                                        <button class="btn btn-default disabled" id="joinButton" type="button">Join</button>
+                                      </span>
+                                  </div>
+                                  <span id="successMessage" class="help-block hidden">Thank you for your submission.</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="action">action</div>
+                </div>
             </div>
-          </div>
-
-          <div id="gameOver">Game Over</div>
-          <div id="tweet">
-            <b>Tweet</b>
-            <a id="postLeader" disabled="disabled" href="https://twitter.com/intent/tweet?text=I%20just%20%23CFpush%20my%20first%20app%20%23pairprogramming%20with%20%40EMCDojo%20%26%20%23CloudFoundry%20at%20%23EMCWorld.%20Click%20to%20play%20%23dojosnake.&url=http%3A%2F%2Fdojo-snake.pcf.beta.virtustream.com%2F&related=emcdojo">
-              <img class="sendTweetImg" src="assets/image/twitter.png">
-            </a>
-            and
-
-            <a href="https://twitter.com/EmcDojo" class="twitter-follow-button" data-show-count="false" data-size="large" data-show-screen-name="false">Follow @EmcDojo</a>
-            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-
-            to join our leaderboard!
-            <!-- Simple Textfield -->
-
-            <div id="sendTweet">
-              <input type="text" id="userHandle" placeholder="@TwitterUsername" />
-            </div>
-          </div>
-          <div id="action">action</div>
         </div>
-      </div>
-
     </div>
     <div id="footer">
-      <a href="http://pivotal.io/platform" target="_blank">
-        <img src="assets/image/cloudfoundry.png" style="max-width: 22vw; max-height:10vh; float:right;">
-      </a>
-      <a href="http://dojoblog.emc.com" target="_blank">
-        <img src="assets/image/dojo.png" style="max-width: 22vw; max-height:10vh;float:right;">
-      </a>
-      <a href="http://www.emc.com/en-us/index.htm" target="_blank">
-        <img src="assets/image/emc.jpg" style="max-width: 22vw; max-height:10vh;float:right;">
-      </a>
-      <a href="http://www.virtustream.com" target="_blank">
-        <img src="assets/image/virtustream.png" style="max-width: 22vw; max-height:10vh;float:right;">
-      </a>
-      <div style="clear:both"></div>
+        <a href="http://pivotal.io/platform" target="_blank">
+            <img src="assets/image/cloudfoundry.png" style="max-width: 22vw; max-height:10vh; float:right;">
+        </a>
+        <a href="http://dojoblog.emc.com" target="_blank">
+            <img src="assets/image/dojo.png" style="max-width: 22vw; max-height:10vh;float:right;">
+        </a>
+        <a href="http://www.emc.com/en-us/index.htm" target="_blank">
+            <img src="assets/image/emc.jpg" style="max-width: 22vw; max-height:10vh;float:right;">
+        </a>
+        <a href="http://www.virtustream.com" target="_blank">
+            <img src="assets/image/virtustream.png" style="max-width: 22vw; max-height:10vh;float:right;">
+        </a>
+        <div style="clear:both"></div>
     </div>
-  </body>
+</body>
+
 </html>
