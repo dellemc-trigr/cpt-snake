@@ -177,7 +177,6 @@ $(document).ready(function() {
     paintExplosion(nx, ny);
 
     $("#gameBoard").show();
-    $("#menuContainer").show();
     $("#tweet").show();
     $("#gameOver").show();
     $("#action").show();

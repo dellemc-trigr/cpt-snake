@@ -4,31 +4,42 @@
   div#tweet, div#sendTweet {
     font-size: 1.0vw;
   }
-
-  div#gameOver, div#action {
-    font-size: 1.8vw;
-  }
 }
 
 @media only screen and (max-width: 800px) and (orientation: portrait) {
-  div#gameOver, div#action {
-    font-size: 3.0vw;
+  div.container {
+    padding: 0;
+    margin: 0;
   }
 
-  div#logo img.logo_img {
-    height: 20vw;
+  div#snakeCanvasContainer {
+    height: 85vh;
+  }
+  canvas#snakeCanvas {
+    border: none;
   }
 
-  #leaders {
+  div#tweet, div#sendTweet {
+    font-size: 2.0vw;
+  }
+
+  #leaderBoard {
     font-size: 2.3vw;
   }
 }
 
 @media only screen and (max-width: 1000px) and (orientation: landscape) {
-  div#gameOver, div#action {
-    font-size: 2.5vh;
+  div.container {
+    padding: 0;
+    margin: 0;
   }
 
+  div#snakeCanvasContainer {
+    height: 85vh;
+  }
+  canvas#snakeCanvas {
+    border: none;
+  }
   div#logo img.logo_img {
     height: 20vh;
   }
@@ -43,14 +54,6 @@
 }
 
 @media only screen and (min-width: 1000px) and (orientation: landscape) {
-  div#gameOver, div#action {
-    font-size: 2.0vh;
-  }
-
-  div#logo img.logo_img {
-    height: 30vh;
-  }
-
   div#tweet, div#sendTweet {
     font-size: 1.2vh;
   }
@@ -80,8 +83,8 @@ img {
 
 #snakeContainer {
   position: relative;
-  width: 100vw;
-  height: 93vh;
+  width: 100%;
+  height: 85vh;
   border-bottom: medium solid #039be5;
   background-image: url("../image/white.png");
   background-size: 100% 100%;
@@ -89,34 +92,23 @@ img {
 }
 
 #snakeCanvasContainer {
-  position: relative;
-  width: 100%;
-  height: 93vh;
-  max-width: 1294px;
-  max-height: 800px;
-  top: 50%;
-  left: 50%;
-  margin-right: -50%;
-  transform: translate(-50%, -50%);
-  border: 5px solid #039be5;
+  height: 84vh;
 }
 
 #gameBoard {
   position: absolute;
-  width: 100%;
-  height: 93vh;
-  max-width: 1294px;
-  max-height: 800px;
+  font-family: LVDCGameOver;
+  text-align: center;
 
   top: 50%;
   left: 50%;
-  margin-right: -50%;
   transform: translate(-50%, -50%);
-  border: 5px solid #039be5;
+  -webkit-transform: translate(-50%, -50%);
 }
 
 #snakeCanvas {
   color: #039be5;
+  border: 0.5vh solid #039be5;
 }
 
 .disabled {
@@ -129,38 +121,24 @@ img {
 
 #footer {
   position: relative;
-  height: 7vh;
+  height: 15vh;
   width: 100%;
 }
 
-#menuWrapper {
-    position: absolute;
-    text-align: center;
-    width: 100%;
-    left: 50%;
-    top: 50%;
-    height: 100%;
-    max-height: 800px;
-    transform: translate(-50%, -50%);
-    font-family: LVDCGameOver;
-    display: block;
-}
 
 #gameOver {
   display:none;
-  font-size: 1.5vw;
 }
 
 #tweet {
   font-family: 1STSORTI;
   color: black;
   display: none;
-  max-width: 1294px;
+  text-align: left;
 }
 
 #action {
   padding-top: 5vh;
-  font-size: 1.5vw;
   cursor: pointer;
   clear: both;
 }
@@ -171,14 +149,12 @@ img {
 
 #logo{
   margin: 0 auto 0 auto;
-  width: 70%;
 }
 
 img.logo_img {
   display: block;
   margin: auto;
-  height: 30vh;
-  max-height: 350px;
+  width: 50%;
   background-color: transparent;
 }
 
@@ -242,10 +218,14 @@ a[disabled="disabled"] .sendTweetImg {
 }
 
 #footer img {
-  width: 75%;
+  height: 5vh;
   margin: 0 auto;
 }
 
 #anytimeTweet {
   padding: 2vh;
+}
+
+#userHandle {
+  font-family: sans-serif;
 }
