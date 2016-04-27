@@ -93,10 +93,14 @@ img {
 
 #snakeCanvasContainer {
   height: 84vh;
+  position: relative;
 }
 
 #gameBoard {
+  width: 100%;
   position: absolute;
+  padding-left: 50px;
+  padding-right: 50px;
   font-family: LVDCGameOver;
   text-align: center;
 
@@ -104,6 +108,11 @@ img {
   left: 50%;
   transform: translate(-50%, -50%);
   -webkit-transform: translate(-50%, -50%);
+}
+
+#gameBoard .rules {
+  font-family: sans-serif;
+  font-size: 8pt;
 }
 
 #snakeCanvas {
@@ -218,7 +227,7 @@ a[disabled="disabled"] .sendTweetImg {
 }
 
 #footer img {
-  height: 5vh;
+  height: 7vh;
   margin: 0 auto;
 }
 
