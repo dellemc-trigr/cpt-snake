@@ -227,7 +227,8 @@ a[disabled="disabled"] .sendTweetImg {
 }
 
 #footer img {
-  height: 7vh;
+  padding-top: 1vh;
+  height: 5vh;
   margin: 0 auto;
 }
 
