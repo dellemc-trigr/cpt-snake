@@ -4,6 +4,14 @@
   div#tweet, div#sendTweet {
     font-size: 1.0vw;
   }
+  #footer img {
+    max-height: 6vh;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+  }
 }
 
 @media only screen and (max-width: 800px) and (orientation: portrait) {
@@ -130,7 +138,8 @@ img {
 
 #footer {
   position: relative;
-  height: 15vh;
+  top: 5vh;
+  height: 10vh;
   width: 100%;
 }
 
@@ -225,18 +234,15 @@ a[disabled="disabled"] .sendTweetImg {
 #actionItems {
   text-align: left;
 }
-
-#footer img {
-  padding-top: 1vh;
-  height: 5vh;
-  margin: 0 auto;
-}
-
-#anytimeTweet {
-  padding: 2vh;
+#footer div {
+  position: relative;
 }
 
 #userHandle {
   font-family: sans-serif;
   font-size: 16px;
+}
+
+#footer img {
+  max-height: 6vh;
 }
