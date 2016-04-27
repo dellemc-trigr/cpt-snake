@@ -28,7 +28,7 @@ $(document).ready(function() {
   var apple;
   var hamster;
   var explosion;
-  var name="Victor";
+  var name=" ";
 
   init();
 
