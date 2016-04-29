@@ -297,7 +297,7 @@ $(document).ready(function() {
   function updateLeaderBoardDisplay(leaders) {
     var leaderDisplay="";
     $(leaders).each(function (i, leader) {
-      leaderDisplay += "<div class=\"col-xs-6 col-xs-offset-3\">" + (i+1) + ".&nbsp;" +
+      leaderDisplay += "<div>" + (i+1) + ".&nbsp;" +
       "<span class=\"twitter_handle\">" + leader.twitter_handle + "</span>" +
       "&nbsp;&mdash;&nbsp;" +
       "<span class=\"score\">" + leader.score + "</span>" +
