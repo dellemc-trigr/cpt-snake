@@ -25,7 +25,7 @@ $(document).ready(function() {
   var body;
   var background;
   var gameoverBackground;
-  var apple;
+  var fruit;
   var hamster;
   var explosion;
   var name=" ";
@@ -60,7 +60,7 @@ $(document).ready(function() {
     body = initBody(-9999, -9999);
     background = initBackgroundImage(0, 0);
     gameoverBackground = initGameOverBackground(-9999, -9999);
-    apple = initApple(-9999, -9999);
+    fruit = initFruit(-9999, -9999);
     hamster = initBonusFood(-9999, -9999);
     explosion = initExplosion(-9999, -9999);
     paintBackgroundImage(background, w, h);
@@ -145,7 +145,7 @@ $(document).ready(function() {
 
     //Lets paint the food
     drawBonusFood(w,h);
-    paintFood("apple",food.x, food.y);
+    paintFood("fruit",food.x, food.y);
 
     //Lets paint the score
     var score_text = "Score: " + score;
@@ -226,7 +226,7 @@ $(document).ready(function() {
     }
   }
 
-  function initApple(x, y){
+  function initFruit(x, y){
     return initImage("assets/image/apple.png", x, y);
   }
 
@@ -236,8 +236,8 @@ $(document).ready(function() {
 
   //Lets first create a generic function to paint cells
   function paintFood(type,x, y) {
-    if (type == "apple"){
-      ctx.drawImage(apple, x*cw, y*cw, cw, cw);
+    if (type == "fruit"){
+      ctx.drawImage(fruit, x*cw, y*cw, cw, cw);
     }
     else {
       ctx.drawImage(hamster, x*cw, y*cw, cw, cw);

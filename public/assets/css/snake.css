@@ -118,9 +118,20 @@ img {
   -webkit-transform: translate(-50%, -50%);
 }
 
+#gameFrame {
+  background: rgba(190, 228, 228, .60);
+  padding: .1vh;
+}
+
 #gameBoard .rules {
+  margin-top: 5vh;
   font-family: sans-serif;
-  font-size: 1.2vh;
+  font-size: 1.3vh;
+}
+
+#gameBoard .copyright {
+  font-family: sans-serif;
+  font-size: 1.0vh;
 }
 
 #snakeCanvas {
