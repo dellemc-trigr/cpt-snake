@@ -130,6 +130,7 @@ img {
 }
 
 #gameBoard .copyright {
+  margin-top: 5vh;
   font-family: sans-serif;
   font-size: 1.0vh;
 }

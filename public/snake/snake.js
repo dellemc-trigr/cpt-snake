@@ -29,6 +29,8 @@ $(document).ready(function() {
   var hamster;
   var explosion;
   var name=" ";
+  var speed = 150;
+  var fruitPath = "assets/image/apple.png";
 
   init();
 
@@ -77,7 +79,7 @@ $(document).ready(function() {
           var h = $(container).height();
           paint(w, h);
         }
-      }, 150);
+      }, speed);
       shouldSetInterval = false;
     }
     return;
@@ -227,7 +229,7 @@ $(document).ready(function() {
   }
 
   function initFruit(x, y){
-    return initImage("assets/image/apple.png", x, y);
+    return initImage(fruitPath, x, y);
   }
 
   function initBonusFood(x, y){
