@@ -10,4 +10,4 @@ cd cpt-snake/
 cf api "https://api.${CF_ENDPOINT}" --skip-ssl-validation
 cf auth $CF_USERNAME "$CF_PASSWORD"
 cf target -o $CF_ORG -s $CF_SPACE
-cf push dojo-snake-acceptance
+cf push dojo-snake-acceptance -b staticfile_buildpack
