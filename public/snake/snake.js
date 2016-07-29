@@ -15,11 +15,6 @@ $(document).ready(function() {
   var paused = true;
 
   var directions = ["right", "down", "left", "up"];
-  twitter = $("#twitterButton");
-  twitter.attr("data-text", "I just #CFpush my first app #pairprogramming with @EMCDojo & #CloudFoundry at #EMCWorld. Click to play #dojosnake.");
-  twitter.attr("data-url", "http://dojo-snake.pcf.beta.virtustream.com/");
-  twitter.attr("data-related", "EmcDojo");
-
   var heads;
   var tail;
   var body;
@@ -37,12 +32,9 @@ $(document).ready(function() {
   function init() {
     score = 0;
     $("#action").html("Start!");
-    $('#userHandle').val('');
     $('#successMessage').addClass('hidden');
     d = "right"; //default direction
     createSnake();
-    getLeaders().done(updateLeaderBoardDisplay);
-
     redraw();
   }
 
@@ -179,12 +171,9 @@ $(document).ready(function() {
     paintExplosion(nx, ny);
 
     $("#gameBoard").show();
-    $("#tweet").show();
     $("#gameOver").show();
     $("#action").show();
     $("#action").html("> Restart");
-    $("#leaderBoard").hide();
-
 
     var gameOverText = $('#gameOver')[0];
     if(gameOverText) {
@@ -288,56 +277,6 @@ $(document).ready(function() {
     return initImage(src, x, y);
   }
 
-  function getLeaders() {
-    return $.ajax({url: "/backend/index.json"});
-  }
-
-  function getTwitterHandle() {
-    return $('#userHandle').val().replace(/@/g,"");
-  }
-
-  function updateLeaderBoardDisplay(leaders) {
-    var leaderDisplay="";
-    $(leaders).each(function (i, leader) {
-      leaderDisplay += "<div>" + (i+1) + ".&nbsp;" +
-      "<span class=\"twitter_handle\">" + leader.twitter_handle + "</span>" +
-      "&nbsp;&mdash;&nbsp;" +
-      "<span class=\"score\">" + leader.score + "</span>" +
-      "</div>"
-    });
-    var leaders = $("#leaders")
-    if(leaders.size != 0) {
-      leaders.html(leaderDisplay);
-    } else {
-      var none ="<div class=\"col-xs-6 col-xs-offset-3\">" +
-        "&lt;none&gt;" +
-      "</div>"
-      leaders.html(none);
-    }
-
-    $(leaders).show();
-  };
-
-  function validateHandle(event) {
-    if(getTwitterHandle().length > 0) {
-      $('#joinButton').removeClass('disabled');
-    } else {
-      $('#joinButton').addClass('disabled');
-    }
-  }
-
-  function postLeader(handle, score, callback) {
-    return $.ajax({
-      type: 'POST',
-      url: '/backend/',
-      data: {
-        "token": token,
-        "leader": { "twitter_handle": handle, "score": score }
-      },
-      success: callback
-    })
-  }
-
   function paintTail(x, y){
     ctx.drawImage(tail, x*cw, y*cw);
   }
@@ -408,19 +347,6 @@ $(document).ready(function() {
   $$('canvas').swipeRight(function(){ if(d != "left") d = "right"; });
   $$('canvas').swipeUp(function(){ if(d != "down") d = "up"; });
   $$('canvas').bind('touchstart', function(e){ e.preventDefault(); });
-  $("#joinButton").click(function () {
-    $('#joinButton, #userHandle').addClass('disabled');
-    postLeader(getTwitterHandle(), score, function () {
-      $('#joinFormGroup').addClass('has-success');
-      $('#successMessage').removeClass('hidden');
-      $('#userHandle').removeClass('disabled');
-    });
-  });
-
-  $('#userHandle').keyup(function () {
-    $('#successMessage').addClass('hidden');
-    validateHandle();
-  });
 
   $("#action").click(function () {
     $("#gameBoard").hide();
