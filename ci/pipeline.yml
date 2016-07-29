@@ -1,25 +1,31 @@
 jobs:
-  - name: deploy
-    serial: true
-    plan:
-      - aggregate:
-        - get: cpt-snake
-          trigger: true
-      - task: deploy
-        file: cpt-snake/ci/tasks/deploy.yml
-        config:
-          params:
-            CF_IP: {{cf_ip}}
-            CF_ENDPOINT: {{cf_endpoint}}
-            CF_USERNAME: {{cf_username}}
-            CF_PASSWORD: {{cf_password}}
-            CF_ORG: {{cf_org}}
-            CF_SPACE: {{cf_space}}
+- name: deploy
+  serial: true
+  plan:
+    - aggregate:
+      - get: cpt-snake
+        trigger: true
+    - task: deploy
+      config:
+        platform: linux
+        image: docker:///ruby#2.2.4
+        inputs:
+        - name: cpt-snake
+        run:
+          path: cpt-snake/ci/tasks/deploy.sh
+        params:
+          CF_ENDPOINT: {{cf_endpoint}}
+          CF_USERNAME: {{cf_username}}
+          CF_PASSWORD: {{cf_password}}
+          CF_ORG: {{cf_org}}
+          CF_SPACE: {{cf_space}}
 
 resources:
-  - name: cpt-snake
-    type: git
-    source:
-      uri: git@github.com:EMC-CMD/cpt-snake.git
-      branch: master
-      private_key: {{github_private_key}}
+- name: cpt-snake
+  type: git
+  source:
+    uri: https://github.com/EMC-CMD/cpt-snake.git
+    branch: master
+    username: {{github_username}}
+    password: {{github_password}}
+    skip_ssl_verification: true
